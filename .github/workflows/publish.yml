@@ -60,13 +60,6 @@ jobs:
       - name: Build package
         run: yarn build
 
-      - name: Publish to NPM (Private)
-        run: |
-          yarn config set access restricted
-          yarn publish --access restricted
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Create Git tag
         run: |
           git config --local user.email "action@github.com"
