@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
-import { useState } from "react";
-import { CardAppContext } from "./CardAppContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { ReactNode } from 'react';
+import { useState } from 'react';
+import { CardAppContext } from './CardAppContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /* Constants */
 const queryClient = new QueryClient();

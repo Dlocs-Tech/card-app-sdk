@@ -1,1 +1,1 @@
-export { useGetUserById } from "./useGetUserById";
+export { useGetUserById } from './useGetUserById';

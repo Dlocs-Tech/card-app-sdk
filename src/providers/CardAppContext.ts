@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
 /* Types */
 export type CardAppContextType = {
@@ -11,7 +11,7 @@ export type CardAppContextType = {
 export const CardAppContext = createContext<CardAppContextType>({
   sessionInfo: {},
   saveSessionInfo: () => {},
-  cardAppApiKey: "",
+  cardAppApiKey: '',
 });
 
 /* Hook */

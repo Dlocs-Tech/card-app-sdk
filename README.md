@@ -38,6 +38,11 @@ pnpm add @dlocs/card-app-sdk
 - `npm run dev` - Watch mode for development
 - `npm run build` - Build the library
 - `npm run type-check` - Type checking without emit
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Run ESLint with auto-fix
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run format:lint` - Format and lint code
 
 ## Contributing
 

@@ -1,0 +1,2 @@
+yarn format:lint
+git add .
