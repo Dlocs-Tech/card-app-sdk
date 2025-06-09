@@ -1,4 +1,4 @@
-name: Build and Test
+name: Lint
 
 on:
   pull_request:
@@ -12,6 +12,12 @@ jobs:
         node-version: [22.13]
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
 
       - name: Cache node modules
         id: cache-npm
@@ -27,16 +33,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - uses: actions/setup-node@v3
-        with:
-          cache: 'yarn'
-          node-version: ${{ matrix.node-version }}
-
       - name: Install Dependencies
-        run: |
-          yarn install
+        run: yarn install
 
-      - name: Build entire project
-        continue-on-error: true
-        run: |
-          yarn build
+      - name: Check lint issues
+        run: yarn lint
