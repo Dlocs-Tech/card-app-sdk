@@ -1,5 +1,5 @@
 {
-  "name": "@dlocs/card-app-sdk",
+  "name": "@dlocs-tech/card-app-sdk",
   "version": "1.0.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
-    "prepublish": "npm run build",
+    "prepublish": "rm -rf dist && yarn run build",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -45,5 +45,9 @@
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
     "vite-plugin-dts": "^4.5.4"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "4",
+    "axios": "^1.9.0"
   }
 }
