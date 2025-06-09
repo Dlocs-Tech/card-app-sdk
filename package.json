@@ -1,0 +1,49 @@
+{
+  "name": "@dlocs/card-app-sdk",
+  "version": "1.0.0",
+  "author": "Dlocs-Tech",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/card-app-sdk.umd.js",
+  "module": "./dist/card-app-sdk.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/card-app-sdk.es.js",
+      "require": "./dist/card-app-sdk.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "prepublish": "npm run build",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "terser": "^5.41.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}
