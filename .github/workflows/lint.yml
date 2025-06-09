@@ -37,4 +37,4 @@ jobs:
         run: yarn install
 
       - name: Check lint issues
-        run: yarn lint
+        run: yarn lint:check
