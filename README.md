@@ -29,20 +29,22 @@ pnpm add @dlocs/card-app-sdk
 ### Setup
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development: `npm run dev`
-4. Build library: `npm run build`
+2. Install dependencies: `yarn install`
+3. Start development: `yarn dev`
+4. Build library: `yarn build`
 
 ### Scripts
 
-- `npm run dev` - Watch mode for development
-- `npm run build` - Build the library
-- `npm run type-check` - Type checking without emit
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Run ESLint with auto-fix
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
-- `npm run format:lint` - Format and lint code
+- `yarn dev` - Watch mode for development
+- `yarn build` - Build the library
+- `yarn prepublish` - Clean dist folder and build for publishing
+- `yarn type-check` - Type checking without emit
+- `yarn lint:check` - Run ESLint with error reporting
+- `yarn lint:fix` - Run ESLint with auto-fix
+- `yarn format` - Format code with Prettier
+- `yarn format:check` - Check code formatting
+- `yarn format:lint` - Format and lint code
+- `yarn prepare` - Setup husky hooks
 
 ## Contributing
 
