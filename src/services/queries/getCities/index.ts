@@ -1,0 +1,1 @@
+export { useGetCities } from './useGetCities';

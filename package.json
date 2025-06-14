@@ -1,12 +1,12 @@
 {
   "name": "@dlocs-tech/card-app-sdk",
-  "version": "1.1.0",
+  "version": "1.15.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
-  "private": true,
   "main": "./dist/card-app-sdk.umd.js",
   "module": "./dist/card-app-sdk.es.js",
   "types": "./dist/index.d.ts",
+  "repository": "https://github.com/Dlocs-Tech/card-app-sdk",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

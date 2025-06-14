@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       matrix:
         node-version: [22.13]
@@ -31,6 +33,8 @@ jobs:
         with:
           cache: 'yarn'
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dlocs-tech'
 
       - name: Install Dependencies
         run: |

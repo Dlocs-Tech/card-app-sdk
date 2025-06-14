@@ -1,0 +1,68 @@
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { useCardAppContext } from '../../../providers';
+import { API_URL } from '../../../constants';
+import type { IGenericQuery } from '../../../types/globals';
+
+/* Types */
+export type TCardType = {
+  cardTypeId: number;
+  organization: string;
+  country: string;
+  bankCardBin: string;
+  type: string;
+  typeStr: string;
+  cardName: string;
+  cardDesc: string;
+  cardPrice: string;
+  cardPriceCurrency: string;
+  support: string[];
+  supportHolderRegin: string[];
+  supportHolderAreaCode: string[];
+  needCardHolder: boolean;
+  needDepositForActiveCard: boolean;
+  depositAmountMinQuotaForActiveCard: string;
+  depositAmountMaxQuotaForActiveCard: string;
+  fiatCurrency: string;
+  maxCount: number;
+  status: string;
+  rechargeCurrency: string;
+  rechargeMinQuota: number;
+  rechargeMaxQuota: number;
+  rechargeFeeRate: number;
+  rechargeFixedFee: number;
+  rechargeDigital: number;
+  enableActiveCard: boolean;
+  enableDeposit: boolean;
+  enableFreeze: boolean;
+  enableUnFreeze: boolean;
+};
+
+export type TGetCardTypesResponse = {
+  success: boolean;
+  code: number;
+  msg: string;
+  data: TCardType[];
+};
+
+/* Hook */
+export const useGetCardTypes = ({
+  onError,
+  refetchInterval,
+}: IGenericQuery) => {
+  const { cardAppApiKey } = useCardAppContext();
+
+  return useQuery({
+    queryKey: ['getCardTypes'],
+    onError,
+    refetchInterval,
+    queryFn: async () => {
+      const response = await axios.get(`${API_URL}/banking/cards/types`, {
+        headers: { 'x-api-key': cardAppApiKey },
+      });
+
+      const cardTypes: TGetCardTypesResponse = response.data;
+      return cardTypes;
+    },
+  });
+};

@@ -1,0 +1,1 @@
+export { useGetAreaCodes } from './useGetAreaCodes';
