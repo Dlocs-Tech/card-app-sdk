@@ -5,19 +5,21 @@ import { API_URL } from '../../../constants';
 import type { IGenericMutation } from '../../../types/globals';
 import type { TUser } from '../../queries/getUser/useGetUser';
 
-export interface ICreateUserProps {
+/* Types */
+export type ICreateUserProps = {
   email: string;
   role: string;
   address: string;
-}
+};
 
-export interface ICreateUserResponse {
+export type ICreateUserResponse = {
   code: number;
   msg: string;
   success: boolean;
   data: TUser;
-}
+};
 
+/* Hook */
 export const useCreateUser = ({
   onError,
   onSuccess,

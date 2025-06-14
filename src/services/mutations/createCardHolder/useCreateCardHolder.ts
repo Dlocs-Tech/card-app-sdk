@@ -4,7 +4,8 @@ import axios from 'axios';
 import { API_URL } from '../../../constants';
 import type { IGenericMutation } from '../../../types/globals';
 
-export interface ICreateCardHolderProps {
+/* Types */
+export type ICreateCardHolderProps = {
   address: string;
   userId?: number;
   cardTypeId: number;
@@ -16,9 +17,9 @@ export interface ICreateCardHolderProps {
   country: string;
   town: string;
   postCode: string;
-}
+};
 
-export interface ICreateCardHolderResponse {
+export type ICreateCardHolderResponse = {
   success: boolean;
   code: number;
   msg: string;
@@ -29,8 +30,9 @@ export interface ICreateCardHolderResponse {
     statusStr: string;
     respMsg: string;
   };
-}
+};
 
+/* Hook */
 export const useCreateCardHolder = ({
   onError,
   onSuccess,

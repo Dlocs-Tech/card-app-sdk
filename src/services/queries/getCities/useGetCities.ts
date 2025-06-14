@@ -4,6 +4,7 @@ import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
 import type { IGenericQuery } from '../../../types/globals';
 
+/* Types */
 export type TCity = {
   code: string;
   name: string;
