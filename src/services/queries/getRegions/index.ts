@@ -1,1 +1,0 @@
-export { useGetRegions } from './useGetRegions';

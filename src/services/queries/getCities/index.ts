@@ -1,1 +1,0 @@
-export { useGetCities } from './useGetCities';
