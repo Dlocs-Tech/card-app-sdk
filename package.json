@@ -3,6 +3,9 @@
   "version": "1.16.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/card-app-sdk.umd.js",
   "module": "./dist/card-app-sdk.es.js",
   "types": "./dist/index.d.ts",
