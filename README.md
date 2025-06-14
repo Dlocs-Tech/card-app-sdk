@@ -1,4 +1,4 @@
-# @dlocs/card-app-sdk
+# @dlocs-tech/card-app-sdk
 
 > React hooks library for card applications
 
