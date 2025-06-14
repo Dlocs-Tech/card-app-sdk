@@ -3,7 +3,6 @@
   "version": "1.14.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
-  "private": true,
   "main": "./dist/card-app-sdk.umd.js",
   "module": "./dist/card-app-sdk.es.js",
   "types": "./dist/index.d.ts",
