@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dlocs-tech'
 
       - name: Cache node modules
         id: cache-npm
@@ -34,6 +36,8 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn install
 
       - name: Check lint issues
