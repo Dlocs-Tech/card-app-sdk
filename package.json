@@ -6,6 +6,7 @@
   "main": "./dist/card-app-sdk.umd.js",
   "module": "./dist/card-app-sdk.es.js",
   "types": "./dist/index.d.ts",
+  "repository": "https://github.com/Dlocs-Tech/card-app-sdk",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
