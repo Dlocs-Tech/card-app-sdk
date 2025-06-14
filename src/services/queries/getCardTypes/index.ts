@@ -1,1 +1,0 @@
-export { useGetCardTypes } from './useGetCardTypes';
