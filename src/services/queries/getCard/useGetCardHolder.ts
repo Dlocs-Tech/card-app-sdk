@@ -7,6 +7,7 @@ import type { IGenericQuery } from '../../../types/globals';
 /* Types */
 export type TGetCardHolderProps = {
   userId: number;
+  holderId: number;
 };
 
 export type TCardHolder = {
@@ -31,26 +32,31 @@ export type TGetCardHolderResponse = {
   success: boolean;
   code: number;
   msg: string;
-  data: TCardHolder[];
+  data: TCardHolder;
 };
 
 /* Hook */
 export const useGetCardHolder = ({
   userId,
+  holderId,
   onError,
   enabled,
 }: TGetCardHolderProps & IGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getCardHolder', userId],
+    queryKey: ['getCardHolder', userId, holderId],
     onError,
     queryFn: async () => {
       if (!userId) throw new Error('User ID is missing');
+      if (!holderId) throw new Error('Holder ID is missing');
 
-      const response = await axios.get(`${API_URL}/banking/holder/${userId}`, {
-        headers: { 'x-api-key': cardAppApiKey },
-      });
+      const response = await axios.get(
+        `${API_URL}/banking/${userId}/holder/${holderId}`,
+        {
+          headers: { 'x-api-key': cardAppApiKey },
+        }
+      );
 
       const cardHolder: TGetCardHolderResponse = response.data;
       return cardHolder;
