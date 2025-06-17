@@ -1,4 +1,5 @@
 export * from './useGetCardHolder';
+export * from './useGetCardHolders';
 export * from './useGetUserCards';
 export * from './useGetUserCardInfo';
 export * from './useGetUserSingleCardBalance';
