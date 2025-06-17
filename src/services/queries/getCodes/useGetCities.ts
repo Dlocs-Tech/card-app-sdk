@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
+import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
 export type TCity = {
@@ -20,7 +20,7 @@ export type TGetCitiesResponse = {
 };
 
 /* Hook */
-export const useGetCities = ({ onError, refetchInterval }: IGenericQuery) => {
+export const useGetCities = ({ onError, refetchInterval }: TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({

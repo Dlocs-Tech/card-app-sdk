@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
-import type { TCardHolder } from './useGetCardHolder';
+import type { TGenericQuery } from '../../../types/globals';
+import type { TCardHolder } from './useGetCardHolderWithId';
 
 /* Types */
 export type TGetCardHoldersProps = {
@@ -22,7 +22,7 @@ export const useGetCardHolders = ({
   userId,
   onError,
   enabled,
-}: TGetCardHoldersProps & IGenericQuery) => {
+}: TGetCardHoldersProps & TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({

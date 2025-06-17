@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
+import type { TGenericQuery } from '../../../types/globals';
 import type { TTransaction } from './useGetUserTransactions';
 
 /* Types */
@@ -24,7 +24,7 @@ export const useGetUserTransactionsById = ({
   userId,
   onError,
   enabled,
-}: TGetUserTransactionsByIdProps & IGenericQuery) => {
+}: TGetUserTransactionsByIdProps & TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({

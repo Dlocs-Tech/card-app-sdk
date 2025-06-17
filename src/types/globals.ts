@@ -1,11 +1,11 @@
 /* Types */
-export type IGenericQuery = {
+export type TGenericQuery = {
   enabled?: boolean;
   refetchInterval?: number;
   onError?: (error: Error) => void;
 };
 
-export type IGenericMutation<T> = {
+export type TGenericMutation<T> = {
   onError?: (error: Error) => void;
   onSuccess?: (data: T) => void;
 };

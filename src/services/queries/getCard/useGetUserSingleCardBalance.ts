@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
+import type { TGenericQuery } from '../../../types/globals';
 import type { TBalanceInfo } from './useGetUserCardInfo';
 
 /* Types */
@@ -24,7 +24,7 @@ export const useGetUserSingleCardBalance = ({
   cardId,
   onError,
   enabled,
-}: TGetUserSingleCardBalanceProps & IGenericQuery) => {
+}: TGetUserSingleCardBalanceProps & TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({
