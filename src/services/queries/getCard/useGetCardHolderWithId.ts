@@ -2,10 +2,10 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
+import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
-export type TGetCardHolderProps = {
+export type TGetCardHolderWithIdProps = {
   userId: number;
   holderId: number;
 };
@@ -36,16 +36,16 @@ export type TGetCardHolderResponse = {
 };
 
 /* Hook */
-export const useGetCardHolder = ({
+export const useGetCardHolderWithId = ({
   userId,
   holderId,
   onError,
   enabled,
-}: TGetCardHolderProps & IGenericQuery) => {
+}: TGetCardHolderWithIdProps & TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getCardHolder', userId, holderId],
+    queryKey: ['getCardHolderWithId', userId, holderId],
     onError,
     queryFn: async () => {
       if (!userId) throw new Error('User ID is missing');

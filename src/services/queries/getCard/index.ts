@@ -1,4 +1,4 @@
-export * from './useGetCardHolder';
+export * from './useGetCardHolderWithId';
 export * from './useGetCardHolders';
 export * from './useGetUserCards';
 export * from './useGetUserCardInfo';

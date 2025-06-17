@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
-import type { IGenericQuery } from '../../../types/globals';
+import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
 export type TCardType = {
@@ -49,7 +49,7 @@ export type TGetCardTypesResponse = {
 export const useGetCardTypes = ({
   onError,
   refetchInterval,
-}: IGenericQuery) => {
+}: TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({

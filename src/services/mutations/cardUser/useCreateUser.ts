@@ -2,17 +2,17 @@ import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
 import { API_URL } from '../../../constants';
-import type { IGenericMutation } from '../../../types/globals';
-import type { TUser } from '../../queries/getUser/useGetUser';
+import type { TGenericMutation } from '../../../types/globals';
+import type { TUser } from '../../queries/getUser';
 
 /* Types */
-export type ICreateUserProps = {
+export type TCreateUserProps = {
   email: string;
   role: string;
   address: string;
 };
 
-export type ICreateUserResponse = {
+export type TCreateUserResponse = {
   code: number;
   msg: string;
   success: boolean;
@@ -23,15 +23,15 @@ export type ICreateUserResponse = {
 export const useCreateUser = ({
   onError,
   onSuccess,
-}: IGenericMutation<ICreateUserResponse>) => {
+}: TGenericMutation<TCreateUserResponse>) => {
   const { cardAppApiKey } = useCardAppContext();
-  return useMutation<ICreateUserResponse, Error, ICreateUserProps>({
+  return useMutation<TCreateUserResponse, Error, TCreateUserProps>({
     onError,
     onSuccess,
-    mutationFn: async ({ email, role, address }: ICreateUserProps) => {
+    mutationFn: async ({ email, role, address }: TCreateUserProps) => {
       if (!email || !address) throw new Error('Authentication failed');
 
-      const { data }: { data: ICreateUserResponse } = await axios.post(
+      const { data }: { data: TCreateUserResponse } = await axios.post(
         `${API_URL}/users`,
         {
           email,

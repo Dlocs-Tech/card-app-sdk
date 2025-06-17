@@ -2,15 +2,24 @@ import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
 import { API_URL } from '../../../constants';
-import type { IGenericMutation } from '../../../types/globals';
-import type { ICreateCardHolderProps } from '../createCardHolder';
+import type { TGenericMutation } from '../../../types/globals';
 
 /* Types */
-export type IUpdateCardHolderProps = ICreateCardHolderProps & {
-  holderId: number;
+export type TCreateCardHolderProps = {
+  address: string;
+  userId?: number;
+  cardTypeId: number;
+  areaCode: string;
+  mobile: string;
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  country: string;
+  town: string;
+  postCode: string;
 };
 
-export type IUpdateCardHolderResponse = {
+export type TCreateCardHolderResponse = {
   success: boolean;
   code: number;
   msg: string;
@@ -24,29 +33,24 @@ export type IUpdateCardHolderResponse = {
 };
 
 /* Hook */
-export const useUpdateCardHolder = ({
+export const useCreateCardHolder = ({
   onError,
   onSuccess,
-}: IGenericMutation<IUpdateCardHolderResponse>) => {
+}: TGenericMutation<TCreateCardHolderResponse>) => {
   const { cardAppApiKey } = useCardAppContext();
-  return useMutation<IUpdateCardHolderResponse, Error, IUpdateCardHolderProps>({
+  return useMutation<TCreateCardHolderResponse, Error, TCreateCardHolderProps>({
     onError,
     onSuccess,
-    mutationFn: async ({
-      userId,
-      holderId,
-      ...requestData
-    }: IUpdateCardHolderProps) => {
+    mutationFn: async ({ userId, ...requestData }: TCreateCardHolderProps) => {
       if (
         !userId ||
-        !holderId ||
         Object.values(requestData).some((value) => !value) ||
         !cardAppApiKey
       )
-        throw new Error('Card Holder update failed');
+        throw new Error('Authentication failed');
 
-      const { data }: { data: IUpdateCardHolderResponse } = await axios.put(
-        `${API_URL}/banking/${userId}/holder/${holderId}`,
+      const { data }: { data: TCreateCardHolderResponse } = await axios.post(
+        `${API_URL}/banking/${userId}/holder`,
         requestData,
         {
           headers: {

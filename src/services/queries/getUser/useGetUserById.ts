@@ -3,25 +3,25 @@ import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
-import type { TGetUserProps, TGetUserResponse } from './types';
+import type { TGetUserByIdProps, TGetUserResponse } from './types';
 
 /* Hook */
-export const useGetUser = ({
-  email,
+export const useGetUserById = ({
+  id,
   onError,
   enabled,
-}: TGetUserProps & TGenericQuery) => {
+}: TGetUserByIdProps & TGenericQuery) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getUser', email],
+    queryKey: ['getUserById', id],
     retry: 1,
     onError,
     queryFn: async () => {
-      if (!email) throw new Error('Email is missing');
+      if (!id) throw new Error('Id is missing');
 
       const response = await axios.get(`${API_URL}/users`, {
-        params: { email },
+        params: { id },
         headers: { 'x-api-key': cardAppApiKey },
       });
 

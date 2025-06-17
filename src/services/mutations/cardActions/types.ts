@@ -1,4 +1,4 @@
-export type ICard = {
+export type TCard = {
   orderNo: string;
   merchantOrderNo: string;
   cardNo: string;
@@ -13,15 +13,15 @@ export type ICard = {
   transactionTime: number;
 };
 
-export type ICardActionsProps = {
+export type TCardActionsProps = {
   userId: number;
   cardId: number;
   clientRemark?: string;
 };
 
-export type ICardActionsResponse = {
+export type TCardActionsResponse = {
   code: number;
   msg: string;
   success: boolean;
-  data: ICard;
+  data: TCard;
 };

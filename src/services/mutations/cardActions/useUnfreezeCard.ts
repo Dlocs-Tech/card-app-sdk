@@ -2,22 +2,22 @@ import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
 import { API_URL } from '../../../constants';
-import type { IGenericMutation } from '../../../types/globals';
-import type { ICardActionsProps, ICardActionsResponse } from './types';
+import type { TGenericMutation } from '../../../types/globals';
+import type { TCardActionsProps, TCardActionsResponse } from './types';
 
 /* Hook */
 export const useUnfreezeCard = ({
   onError,
   onSuccess,
-}: IGenericMutation<ICardActionsResponse>) => {
+}: TGenericMutation<TCardActionsResponse>) => {
   const { cardAppApiKey } = useCardAppContext();
-  return useMutation<ICardActionsResponse, Error, ICardActionsProps>({
+  return useMutation<TCardActionsResponse, Error, TCardActionsProps>({
     onError,
     onSuccess,
-    mutationFn: async ({ userId, cardId, clientRemark }: ICardActionsProps) => {
+    mutationFn: async ({ userId, cardId, clientRemark }: TCardActionsProps) => {
       if (!userId || !cardId) throw new Error('Unfreeze card failed');
 
-      const { data }: { data: ICardActionsResponse } = await axios.post(
+      const { data }: { data: TCardActionsResponse } = await axios.post(
         `${API_URL}/banking/${userId}/cards/unfreeze/${cardId}`,
         {
           ...(clientRemark && { clientRemark }),
