@@ -37,17 +37,16 @@ export const useUpdateCardHolder = ({
       holderId,
       ...requestData
     }: TUpdateCardHolderProps) => {
-      if (
-        !userId ||
-        !holderId ||
-        Object.values(requestData).some((value) => !value) ||
-        !cardAppApiKey
-      )
-        throw new Error('Card Holder update failed');
+      if (!userId || !holderId)
+        throw new Error('User ID or holder ID is missing');
+
+      const filteredRequestData = Object.fromEntries(
+        Object.entries(requestData).filter(([, value]) => value !== undefined)
+      );
 
       const { data }: { data: TUpdateCardHolderResponse } = await axios.put(
         `${API_URL}/banking/${userId}/holder/${holderId}`,
-        requestData,
+        filteredRequestData,
         {
           headers: {
             'x-api-key': cardAppApiKey,

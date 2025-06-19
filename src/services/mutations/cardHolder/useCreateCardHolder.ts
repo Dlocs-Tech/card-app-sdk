@@ -6,17 +6,17 @@ import type { TGenericMutation } from '../../../types/globals';
 
 /* Types */
 export type TCreateCardHolderProps = {
-  address: string;
-  userId?: number;
+  userId: number;
   cardTypeId: number;
   areaCode: string;
   mobile: string;
   firstName: string;
   lastName: string;
-  birthday: string;
-  country: string;
-  town: string;
-  postCode: string;
+  birthday?: string;
+  country?: string;
+  town?: string;
+  address?: string;
+  postCode?: string;
 };
 
 export type TCreateCardHolderResponse = {
@@ -42,16 +42,15 @@ export const useCreateCardHolder = ({
     onError,
     onSuccess,
     mutationFn: async ({ userId, ...requestData }: TCreateCardHolderProps) => {
-      if (
-        !userId ||
-        Object.values(requestData).some((value) => !value) ||
-        !cardAppApiKey
-      )
-        throw new Error('Authentication failed');
+      if (!userId) throw new Error('User ID is missing');
+
+      const filteredRequestData = Object.fromEntries(
+        Object.entries(requestData).filter(([, value]) => value !== undefined)
+      );
 
       const { data }: { data: TCreateCardHolderResponse } = await axios.post(
         `${API_URL}/banking/${userId}/holder`,
-        requestData,
+        filteredRequestData,
         {
           headers: {
             'x-api-key': cardAppApiKey,
