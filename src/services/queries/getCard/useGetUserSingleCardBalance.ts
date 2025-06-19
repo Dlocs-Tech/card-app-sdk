@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
+import { API_URL, STALE_TIME } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 import type { TBalanceInfo } from './useGetUserCardInfo';
 
@@ -46,5 +46,6 @@ export const useGetUserSingleCardBalance = ({
       return userSingleCardBalance;
     },
     enabled: !!enabled,
+    staleTime: STALE_TIME,
   });
 };

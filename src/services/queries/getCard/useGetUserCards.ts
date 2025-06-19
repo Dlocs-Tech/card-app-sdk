@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
+import { API_URL, STALE_TIME } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
@@ -43,5 +43,6 @@ export const useGetUserCards = ({
       return userCards;
     },
     enabled: !!enabled,
+    staleTime: STALE_TIME,
   });
 };
