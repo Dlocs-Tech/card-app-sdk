@@ -15,7 +15,7 @@ export const useUnfreezeCard = ({
     onError,
     onSuccess,
     mutationFn: async ({ userId, cardId, clientRemark }: TCardActionsProps) => {
-      if (!userId || !cardId) throw new Error('Unfreeze card failed');
+      if (!userId || !cardId) throw new Error('User ID or card ID is missing');
 
       const { data }: { data: TCardActionsResponse } = await axios.post(
         `${API_URL}/banking/${userId}/cards/unfreeze/${cardId}`,
