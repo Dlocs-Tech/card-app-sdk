@@ -39,5 +39,8 @@ export const useGetCardHolders = ({
       return cardHolders;
     },
     enabled: !!enabled,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   });
 };

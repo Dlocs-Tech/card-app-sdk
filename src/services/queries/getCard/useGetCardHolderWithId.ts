@@ -62,5 +62,8 @@ export const useGetCardHolderWithId = ({
       return cardHolder;
     },
     enabled: !!enabled,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
   });
 };

@@ -10,6 +10,7 @@ export type TRegionResponse = {
   name: string;
   standardCode: string;
 };
+
 export type TGetRegionsResponse = {
   code: number;
   msg: string;

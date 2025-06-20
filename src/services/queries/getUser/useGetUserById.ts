@@ -29,5 +29,8 @@ export const useGetUserById = ({
       return user;
     },
     enabled: !!enabled,
+    cacheTime: 0,
+    staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 };
