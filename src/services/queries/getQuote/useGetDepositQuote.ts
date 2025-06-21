@@ -70,5 +70,8 @@ export const useGetDepositQuote = ({
       const depositQuote: TGetDepositQuoteResponse = response.data;
       return depositQuote;
     },
+    cacheTime: 0,
+    staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 };
