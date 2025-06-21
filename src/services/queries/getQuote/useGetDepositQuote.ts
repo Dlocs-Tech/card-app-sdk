@@ -5,9 +5,55 @@ import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
+export type TTokenInfo = {
+  symbol: string;
+  icon?: string;
+  address: string;
+  amount: string;
+  chainId: number;
+  decimals: number;
+};
+
+export type TRoute = {
+  provider: string;
+  tokens: TTokenInfo[];
+};
+
+export type TFee = {
+  provider: string;
+  value: TTokenInfo;
+  save: TTokenInfo;
+  description: string;
+};
+
+export type TTransaction = {
+  chainId: number;
+  data: string;
+  to: string;
+  value: string;
+};
+
+export type TBridgeExtraInfo = {
+  fee: TTokenInfo;
+  route: TRoute[];
+  inTradeType: string;
+  outTradeType: string;
+  fees: TFee[];
+  routes: TRoute[];
+  kind: string;
+  priceImpact: string;
+  tokenAmountOut: TTokenInfo;
+  tokenAmountOutMin: TTokenInfo;
+  amountInUsd: TTokenInfo;
+  approveTo: string;
+  type: string;
+  rewards: unknown[];
+  estimatedTime: number;
+  tx: TTransaction;
+};
+
 export type TDepositQuoteResponse = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  bridgeExtraInfo: any;
+  bridgeExtraInfo: TBridgeExtraInfo;
   txId: number;
   quotes: {
     to: string;
