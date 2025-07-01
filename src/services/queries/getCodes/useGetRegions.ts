@@ -32,7 +32,7 @@ export const useGetRegions = ({ onError, refetchInterval }: TGenericQuery) => {
       });
 
       const regions: TGetRegionsResponse = response.data;
-      return regions;
+      return regions.data;
     },
   });
 };

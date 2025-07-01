@@ -40,7 +40,7 @@ export const useGetUserCards = ({
       });
 
       const userCards: TGetUserCardsResponse = response.data;
-      return userCards;
+      return userCards.data;
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,

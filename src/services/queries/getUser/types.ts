@@ -6,17 +6,17 @@ export type TGetUserByIdProps = {
   id: number;
 };
 
-export type TCard = {
+export type TCardHolders = {
   id: number;
   createdAt: Date;
   updatedAt: Date;
-};
-
-export type TCardHolders = TCard & {
   cardTypeId: number;
 };
 
-export type TCards = TCard & {
+export type TCards = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
   cardNo: string;
   userId: number;
 };

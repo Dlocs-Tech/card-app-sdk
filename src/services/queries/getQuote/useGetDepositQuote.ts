@@ -26,7 +26,7 @@ export type TFee = {
   description: string;
 };
 
-export type TTransaction = {
+export type TDepositTransaction = {
   chainId: number;
   data: string;
   to: string;
@@ -49,7 +49,7 @@ export type TBridgeExtraInfo = {
   type: string;
   rewards: unknown[];
   estimatedTime: number;
-  tx: TTransaction;
+  tx: TDepositTransaction;
 };
 
 export type TDepositQuoteResponse = {
@@ -114,7 +114,7 @@ export const useGetDepositQuote = ({
       );
 
       const depositQuote: TGetDepositQuoteResponse = response.data;
-      return depositQuote;
+      return depositQuote.data;
     },
     cacheTime: 0,
     staleTime: 0,

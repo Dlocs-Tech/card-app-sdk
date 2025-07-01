@@ -26,7 +26,7 @@ export const useGetUser = ({
       });
 
       const user: TGetUserResponse = response.data;
-      return user;
+      return user.data;
     },
     enabled: !!enabled,
     cacheTime: 0,
