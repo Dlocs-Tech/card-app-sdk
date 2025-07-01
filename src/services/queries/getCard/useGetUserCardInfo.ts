@@ -4,6 +4,7 @@ import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 import { exportPublicKey, generateKeyPair } from '../../../utils/card';
+import forge from 'node-forge';
 
 /* Types */
 export type TGetUserCardInfoProps = {
@@ -57,7 +58,6 @@ export const useGetUserCardInfo = ({
 
       const { publicKey: publicKeyPem, privateKey } = generateKeyPair();
       const publicKey = exportPublicKey(publicKeyPem);
-      console.log('publicKey', publicKey);
 
       const response = await axios.get(
         `${API_URL}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
@@ -66,23 +66,25 @@ export const useGetUserCardInfo = ({
         }
       );
 
-      const decryptedCvv = privateKey.decrypt(
-        Buffer.from(response.data.data.cvv, 'base64').toString('utf8'),
-        'RSA-OAEP'
+      const encryptedCvv = forge.util.decode64(response.data.data.cvv);
+      const decryptedCvv = privateKey.decrypt(encryptedCvv, 'RSA-OAEP');
+
+      const encryptedValidPeriod = forge.util.decode64(
+        response.data.data.validPeriod
       );
-
-      console.log('decryptedCvv', decryptedCvv);
-
       const decryptedValidPeriod = privateKey.decrypt(
-        Buffer.from(response.data.data.validPeriod, 'base64').toString('utf8'),
+        encryptedValidPeriod,
         'RSA-OAEP'
       );
 
-      const userCardInfo: TGetUserCardInfoResponse = {
-        ...response.data,
+      const cardInfoResponse: TGetUserCardInfoResponse = response.data;
+
+      const userCardInfo = {
+        ...cardInfoResponse.data,
         cvv: decryptedCvv,
         validPeriod: decryptedValidPeriod,
       };
+
       return userCardInfo;
     },
     enabled: !!enabled,

@@ -43,7 +43,7 @@ export const useGetUserSingleCardBalance = ({
 
       const userSingleCardBalance: TGetUserSingleCardBalanceResponse =
         response.data;
-      return userSingleCardBalance;
+      return userSingleCardBalance.data;
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,

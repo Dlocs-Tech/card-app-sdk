@@ -62,7 +62,7 @@ export const useGetCardTypes = ({
       });
 
       const cardTypes: TGetCardTypesResponse = response.data;
-      return cardTypes;
+      return cardTypes.data;
     },
   });
 };

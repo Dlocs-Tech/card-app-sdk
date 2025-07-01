@@ -42,7 +42,7 @@ export const useGetUserTransactionsById = ({
       );
 
       const transactionsById: TGetUserTransactionsByIdResponse = response.data;
-      return transactionsById;
+      return transactionsById.data;
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,

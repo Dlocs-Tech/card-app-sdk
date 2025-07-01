@@ -36,7 +36,7 @@ export const useGetCardHolders = ({
       });
 
       const cardHolders: TGetCardHoldersResponse = response.data;
-      return cardHolders;
+      return cardHolders.data;
     },
     enabled: !!enabled,
     staleTime: 0,

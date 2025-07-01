@@ -49,7 +49,7 @@ export const useGetUserTransactions = ({
       });
 
       const transactions: TGetUserTransactionsResponse = response.data;
-      return transactions;
+      return transactions.data;
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,

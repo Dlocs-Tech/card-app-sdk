@@ -33,7 +33,7 @@ export const useGetCities = ({ onError, refetchInterval }: TGenericQuery) => {
       });
 
       const cities: TGetCitiesResponse = response.data;
-      return cities;
+      return cities.data;
     },
   });
 };

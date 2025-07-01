@@ -18,13 +18,3 @@ export function exportPublicKey(publicKeyPem: string) {
     .trim();
   return publicKey;
 }
-
-export async function exportPrivateKey(key: CryptoKey) {
-  const pkcs8 = await window.crypto.subtle.exportKey('pkcs8', key);
-  return bufferToBase64(pkcs8);
-}
-
-function bufferToBase64(buffer: ArrayBuffer) {
-  const binary = String.fromCharCode(...new Uint8Array(buffer));
-  return window.btoa(binary);
-}

@@ -37,7 +37,7 @@ export const useGetAreaCodes = ({
       });
 
       const areaCodes: TGetAreaCodesResponse = response.data;
-      return areaCodes;
+      return areaCodes.data;
     },
   });
 };
