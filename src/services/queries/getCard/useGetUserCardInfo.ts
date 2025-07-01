@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
-import { generateKeyPair } from '../../../utils/card';
+import { exportPublicKey, generateKeyPair } from '../../../utils/card';
 
 /* Types */
 export type TGetUserCardInfoProps = {
@@ -55,24 +55,27 @@ export const useGetUserCardInfo = ({
       if (!userId) throw new Error('User ID is missing');
       if (!cardId) throw new Error('Card ID is missing');
 
-      const { publicKey, privateKey } = generateKeyPair();
+      const { publicKey: publicKeyPem, privateKey } = generateKeyPair();
+      const publicKey = exportPublicKey(publicKeyPem);
       console.log('publicKey', publicKey);
 
       const response = await axios.get(
-        `${API_URL}/banking/${userId}/cards/${cardId}?publicKey=${publicKey}&onlySimpleInfo=false`,
+        `${API_URL}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }
       );
 
       const decryptedCvv = privateKey.decrypt(
-        response.data.data.cvv,
-        'RSAES-PKCS1-V1_5'
+        Buffer.from(response.data.data.cvv, 'base64').toString('utf8'),
+        'RSA-OAEP'
       );
+
       console.log('decryptedCvv', decryptedCvv);
+
       const decryptedValidPeriod = privateKey.decrypt(
-        response.data.data.validPeriod,
-        'RSAES-PKCS1-V1_5'
+        Buffer.from(response.data.data.validPeriod, 'base64').toString('utf8'),
+        'RSA-OAEP'
       );
 
       const userCardInfo: TGetUserCardInfoResponse = {

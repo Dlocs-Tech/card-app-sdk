@@ -10,9 +10,13 @@ export function generateKeyPair(bits: number = 2048) {
   };
 }
 
-export async function exportPublicKey(key: CryptoKey) {
-  const spki = await window.crypto.subtle.exportKey('spki', key);
-  return bufferToBase64(spki);
+export function exportPublicKey(publicKeyPem: string) {
+  const publicKey = publicKeyPem
+    .replace(/-----BEGIN PUBLIC KEY-----/, '')
+    .replace(/-----END PUBLIC KEY-----/, '')
+    .replace(/\r?\n|\r/g, '')
+    .trim();
+  return publicKey;
 }
 
 export async function exportPrivateKey(key: CryptoKey) {
