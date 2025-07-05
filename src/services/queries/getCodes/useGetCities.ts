@@ -19,18 +19,29 @@ export type TGetCitiesResponse = {
   data: TCity[];
 };
 
+export type TGetCitiesParams = TGenericQuery & {
+  regionCode: string;
+};
+
 /* Hook */
-export const useGetCities = ({ onError, refetchInterval }: TGenericQuery) => {
+export const useGetCities = ({
+  onError,
+  refetchInterval,
+  regionCode,
+}: TGetCitiesParams) => {
   const { cardAppApiKey } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getCities'],
+    queryKey: ['getCities', regionCode],
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(`${API_URL}/banking/city`, {
-        headers: { 'x-api-key': cardAppApiKey },
-      });
+      const response = await axios.get(
+        `${API_URL}/banking/city?regionCode=${regionCode}`,
+        {
+          headers: { 'x-api-key': cardAppApiKey },
+        }
+      );
 
       const cities: TGetCitiesResponse = response.data;
       return cities.data;

@@ -72,6 +72,7 @@ export const useGetUserCardInfo = ({
       const encryptedValidPeriod = forge.util.decode64(
         response.data.data.validPeriod
       );
+
       const decryptedValidPeriod = privateKey.decrypt(
         encryptedValidPeriod,
         'RSA-OAEP'
