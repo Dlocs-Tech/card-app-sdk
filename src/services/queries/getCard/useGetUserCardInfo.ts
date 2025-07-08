@@ -6,7 +6,7 @@ import { exportPublicKey, generateKeyPair } from '../../../utils';
 import { API_URL } from '../../../constants';
 
 /* Types */
-type TGetUserCardInfoProps = {
+export type TGetUserCardInfoProps = {
   userId: number;
   cardId: number;
   enabled?: boolean;
@@ -47,6 +47,8 @@ export const useGetUserCardInfo = ({
   enabled,
 }: TGetUserCardInfoProps) => {
   const { cardAppApiKey } = useCardAppContext();
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [userCardInfo, setUserCardInfo] = useState<Omit<
     TUserCardInfo,
     'cvv' | 'validPeriod'
@@ -55,9 +57,8 @@ export const useGetUserCardInfo = ({
     TUserCardInfo,
     'cvv' | 'validPeriod'
   > | null>(null);
-  const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
 
+  /* Internal Functions */
   const fetchCardInfo = async (publicKey: string) => {
     try {
       if (!userId) throw new Error('User ID is missing');
@@ -76,6 +77,7 @@ export const useGetUserCardInfo = ({
       const userCardInfo: TGetUserCardInfoResponse = response.data;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { cvv, validPeriod, ...cardInfo } = userCardInfo.data;
+
       setUserCardInfo(cardInfo);
       return userCardInfo.data;
     } catch (err) {
@@ -123,12 +125,14 @@ export const useGetUserCardInfo = ({
     }
   };
 
+  /* Effects */
   useEffect(() => {
     if (!enabled || loading) return;
     refetchCardInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, cardId, enabled]);
 
+  /* Return */
   return {
     userCardInfo,
     error,
