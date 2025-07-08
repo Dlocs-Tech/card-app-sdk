@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import { API_URL } from '../../../constants';
 import type { TGenericMutation } from '../../../types/globals';
 
 /* Types */
@@ -24,7 +23,8 @@ export const useValidateDeposit = ({
   onError,
   onSuccess,
 }: TGenericMutation<TValidateDepositResponse>) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
+
   return useMutation<TValidateDepositResponse, Error, TValidateDepositProps>({
     onError,
     onSuccess,
@@ -33,7 +33,7 @@ export const useValidateDeposit = ({
         throw new Error('Transaction ID or TX hash is missing');
 
       const { data }: { data: TValidateDepositResponse } = await axios.post(
-        `${API_URL}/bridge/validate-deposit/${transactionId}`,
+        `${cardAppApiUrl}/bridge/validate-deposit/${transactionId}`,
         { txHash },
         {
           headers: {

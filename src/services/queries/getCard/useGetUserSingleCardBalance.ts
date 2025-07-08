@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL, STALE_TIME } from '../../../constants';
+import { STALE_TIME } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 import type { TBalanceInfo } from './useGetUserCardInfo';
 
@@ -25,7 +25,7 @@ export const useGetUserSingleCardBalance = ({
   onError,
   enabled,
 }: TGetUserSingleCardBalanceProps & TGenericQuery) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
     queryKey: ['getUserSingleCardBalance', userId, cardId],
@@ -35,7 +35,7 @@ export const useGetUserSingleCardBalance = ({
       if (!cardId) throw new Error('Card ID is missing');
 
       const response = await axios.get(
-        `${API_URL}/banking/${userId}/cards/balance/${cardId}`,
+        `${cardAppApiUrl}/banking/${userId}/cards/balance/${cardId}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

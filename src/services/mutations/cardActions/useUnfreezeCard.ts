@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import { API_URL } from '../../../constants';
 import type { TGenericMutation } from '../../../types/globals';
 import type { TCardActionsProps, TCardActionsResponse } from './types';
 
@@ -10,7 +9,8 @@ export const useUnfreezeCard = ({
   onError,
   onSuccess,
 }: TGenericMutation<TCardActionsResponse>) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
+
   return useMutation<TCardActionsResponse, Error, TCardActionsProps>({
     onError,
     onSuccess,
@@ -18,7 +18,7 @@ export const useUnfreezeCard = ({
       if (!userId || !cardId) throw new Error('User ID or card ID is missing');
 
       const { data }: { data: TCardActionsResponse } = await axios.post(
-        `${API_URL}/banking/${userId}/cards/unfreeze/${cardId}`,
+        `${cardAppApiUrl}/banking/${userId}/cards/unfreeze/${cardId}`,
         {
           ...(clientRemark && { clientRemark }),
         },

@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import { API_URL } from '../../../constants';
 import type { TGenericMutation } from '../../../types/globals';
 import type { TCreateCardHolderProps } from './useCreateCardHolder';
 
@@ -28,7 +27,8 @@ export const useUpdateCardHolder = ({
   onError,
   onSuccess,
 }: TGenericMutation<TUpdateCardHolderResponse>) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
+
   return useMutation<TUpdateCardHolderResponse, Error, TUpdateCardHolderProps>({
     onError,
     onSuccess,
@@ -45,7 +45,7 @@ export const useUpdateCardHolder = ({
       );
 
       const { data }: { data: TUpdateCardHolderResponse } = await axios.put(
-        `${API_URL}/banking/${userId}/holder/${holderId}`,
+        `${cardAppApiUrl}/banking/${userId}/holder/${holderId}`,
         filteredRequestData,
         {
           headers: {

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 import type { TGetUserProps, TGetUserResponse } from './types';
 
@@ -11,7 +10,7 @@ export const useGetUser = ({
   onError,
   enabled,
 }: TGetUserProps & TGenericQuery) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
     queryKey: ['getUser', email],
@@ -20,7 +19,7 @@ export const useGetUser = ({
     queryFn: async () => {
       if (!email) throw new Error('Email is missing');
 
-      const response = await axios.get(`${API_URL}/users`, {
+      const response = await axios.get(`${cardAppApiUrl}/users`, {
         params: { email },
         headers: { 'x-api-key': cardAppApiKey },
       });

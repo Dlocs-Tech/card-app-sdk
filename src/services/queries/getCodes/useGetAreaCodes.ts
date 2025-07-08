@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
@@ -25,14 +24,14 @@ export const useGetAreaCodes = ({
   onError,
   refetchInterval,
 }: TGenericQuery) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
     queryKey: ['getAreaCode'],
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(`${API_URL}/banking/mobile`, {
+      const response = await axios.get(`${cardAppApiUrl}/banking/mobile`, {
         headers: { 'x-api-key': cardAppApiKey },
       });
 

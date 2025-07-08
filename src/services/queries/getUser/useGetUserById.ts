@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 import type { TGetUserByIdProps, TGetUserResponse } from './types';
 
@@ -11,7 +10,7 @@ export const useGetUserById = ({
   onError,
   enabled,
 }: TGetUserByIdProps & TGenericQuery) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
     queryKey: ['getUserById', id],
@@ -20,7 +19,7 @@ export const useGetUserById = ({
     queryFn: async () => {
       if (!id) throw new Error('Id is missing');
 
-      const response = await axios.get(`${API_URL}/users`, {
+      const response = await axios.get(`${cardAppApiUrl}/users`, {
         params: { id },
         headers: { 'x-api-key': cardAppApiKey },
       });

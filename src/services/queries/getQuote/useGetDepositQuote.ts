@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import { API_URL } from '../../../constants';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
@@ -86,7 +85,7 @@ export const useGetDepositQuote = ({
   onError,
   refetchInterval,
 }: TGetDepositQuoteProps & TGenericQuery) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
     queryKey: [
@@ -106,7 +105,7 @@ export const useGetDepositQuote = ({
       );
 
       const response = await axios.post(
-        `${API_URL}/bridge/pre-deposit/${userId}`,
+        `${cardAppApiUrl}/bridge/pre-deposit/${userId}`,
         filteredQuoteParams,
         {
           headers: { 'x-api-key': cardAppApiKey },

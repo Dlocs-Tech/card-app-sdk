@@ -10,12 +10,14 @@ const queryClient = new QueryClient();
 export type CardAppProviderProps = {
   children: ReactNode;
   cardAppApiKey: string;
+  cardAppApiUrl: string;
 };
 
 /* Provider */
 export const CardAppProvider = ({
   children,
   cardAppApiKey,
+  cardAppApiUrl,
 }: CardAppProviderProps) => {
   const [sessionInfo, setSessionInfo] = useState<Record<string, string>>({});
 
@@ -30,6 +32,7 @@ export const CardAppProvider = ({
           sessionInfo,
           saveSessionInfo,
           cardAppApiKey,
+          cardAppApiUrl,
         }}
       >
         {children}

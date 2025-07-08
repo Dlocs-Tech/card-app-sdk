@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import forge from 'node-forge';
 import { useCardAppContext } from '../../../providers';
 import { exportPublicKey, generateKeyPair } from '../../../utils';
-import { API_URL } from '../../../constants';
 
 /* Types */
 export type TGetUserCardInfoProps = {
@@ -46,7 +45,7 @@ export const useGetUserCardInfo = ({
   cardId,
   enabled,
 }: TGetUserCardInfoProps) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [userCardInfo, setUserCardInfo] = useState<Omit<
@@ -68,7 +67,7 @@ export const useGetUserCardInfo = ({
       setError(null);
 
       const response = await axios.get(
-        `${API_URL}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
+        `${cardAppApiUrl}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

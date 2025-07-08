@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import { API_URL } from '../../../constants';
 import type { TGenericMutation } from '../../../types/globals';
 import type { TUser } from '../../queries/getUser';
 
@@ -24,7 +23,8 @@ export const useCreateUser = ({
   onError,
   onSuccess,
 }: TGenericMutation<TCreateUserResponse>) => {
-  const { cardAppApiKey } = useCardAppContext();
+  const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
+
   return useMutation<TCreateUserResponse, Error, TCreateUserProps>({
     onError,
     onSuccess,
@@ -32,7 +32,7 @@ export const useCreateUser = ({
       if (!email || !address) throw new Error('Authentication failed');
 
       const { data }: { data: TCreateUserResponse } = await axios.post(
-        `${API_URL}/users`,
+        `${cardAppApiUrl}/users`,
         {
           email,
           address,
