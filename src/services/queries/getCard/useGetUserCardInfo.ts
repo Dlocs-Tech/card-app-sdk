@@ -51,7 +51,7 @@ export const useGetUserCardInfo = ({
     TUserCardInfo,
     'cvv' | 'validPeriod'
   > | null>(null);
-  const [sensibleData, setSensibleData] = useState<Pick<
+  const [sensitiveData, setSensitiveData] = useState<Pick<
     TUserCardInfo,
     'cvv' | 'validPeriod'
   > | null>(null);
@@ -91,7 +91,7 @@ export const useGetUserCardInfo = ({
     fetchCardInfo(publicKey);
   };
 
-  const getSensibleData = async (timeOut: number = 30000) => {
+  const getSensitiveData = async (timeOut: number = 30000) => {
     try {
       setLoading(true);
       setError(null);
@@ -109,13 +109,13 @@ export const useGetUserCardInfo = ({
         'RSA-OAEP'
       );
 
-      const cardSensibleData = {
+      const cardSensitiveData = {
         cvv: decryptedCvv,
         validPeriod: decryptedValidPeriod,
       };
 
-      setSensibleData(cardSensibleData);
-      setTimeout(() => setSensibleData(null), timeOut);
+      setSensitiveData(cardSensitiveData);
+      setTimeout(() => setSensitiveData(null), timeOut);
     } catch (err) {
       setError(err as Error);
     } finally {
@@ -133,8 +133,8 @@ export const useGetUserCardInfo = ({
     userCardInfo,
     error,
     loading,
-    getSensibleData,
+    getSensitiveData,
     refetchCardInfo,
-    sensibleData,
+    sensitiveData,
   };
 };
