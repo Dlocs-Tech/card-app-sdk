@@ -4,60 +4,14 @@ import { useCardAppContext } from '../../../providers';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
-export type TTokenInfo = {
-  symbol: string;
-  icon?: string;
-  address: string;
-  amount: string;
-  chainId: number;
-  decimals: number;
-};
-
-export type TRoute = {
-  provider: string;
-  tokens: TTokenInfo[];
-};
-
-export type TFee = {
-  provider: string;
-  value: TTokenInfo;
-  save: TTokenInfo;
-  description: string;
-};
-
-export type TDepositTransaction = {
-  chainId: number;
-  data: string;
+export type TQuote = {
   to: string;
-  value: string;
-};
-
-export type TBridgeExtraInfo = {
-  fee: TTokenInfo;
-  route: TRoute[];
-  inTradeType: string;
-  outTradeType: string;
-  fees: TFee[];
-  routes: TRoute[];
-  kind: string;
-  priceImpact: string;
-  tokenAmountOut: TTokenInfo;
-  tokenAmountOutMin: TTokenInfo;
-  amountInUsd: TTokenInfo;
-  approveTo: string;
-  type: string;
-  rewards: unknown[];
-  estimatedTime: number;
-  tx: TDepositTransaction;
+  data: string;
 };
 
 export type TDepositQuoteResponse = {
-  bridgeExtraInfo: TBridgeExtraInfo;
   txId: number;
-  quotes: {
-    to: string;
-    data: string;
-  }[];
+  quotes: TQuote[];
 };
 
 export type TGetDepositQuoteResponse = {
@@ -72,7 +26,6 @@ export type TGetDepositQuoteProps = {
   quoteParams: {
     amount: string;
     holderId: number;
-    slippage: number;
     cardId?: number;
   };
 };
@@ -93,7 +46,6 @@ export const useGetDepositQuote = ({
       userId,
       quoteParams.amount,
       quoteParams.holderId,
-      quoteParams.slippage,
       quoteParams.cardId,
     ],
     enabled,
@@ -105,7 +57,7 @@ export const useGetDepositQuote = ({
       );
 
       const response = await axios.post(
-        `${cardAppApiUrl}/bridge/pre-deposit/${userId}`,
+        `${cardAppApiUrl}/deposit/pre-deposit/${userId}`,
         filteredQuoteParams,
         {
           headers: { 'x-api-key': cardAppApiKey },

@@ -19,6 +19,7 @@ export type TTransaction = {
   depositAddress: string;
   amount: string;
   blockTimestamp: number;
+  description: string;
   createdAt: string;
   updatedAt: string;
 };
