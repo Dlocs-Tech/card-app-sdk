@@ -56,12 +56,9 @@ export const useGetCardTypes = ({
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(
-        `${cardAppApiUrl}/v1/banking/cards/types`,
-        {
-          headers: { 'x-api-key': cardAppApiKey },
-        }
-      );
+      const response = await axios.get(`${cardAppApiUrl}/v2/cards/types`, {
+        headers: { 'x-api-key': cardAppApiKey },
+      });
 
       const cardTypes: TGetCardTypesResponse = response.data;
       return cardTypes.data;

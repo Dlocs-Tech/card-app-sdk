@@ -18,7 +18,7 @@ export const useFreezeCard = ({
       if (!userId || !cardId) throw new Error('User ID or card ID is missing');
 
       const { data }: { data: TCardActionsResponse } = await axios.post(
-        `${cardAppApiUrl}/v1/banking/${userId}/cards/freeze/${cardId}`,
+        `${cardAppApiUrl}/v2/cards/${userId}/freeze/${cardId}`,
         {
           ...(clientRemark && { clientRemark }),
         },
