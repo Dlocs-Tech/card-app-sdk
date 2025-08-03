@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TBaseResponse, TGenericQuery } from '../../../types/queries';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
 export type TCity = {
