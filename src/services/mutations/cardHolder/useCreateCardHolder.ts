@@ -49,7 +49,7 @@ export const useCreateCardHolder = ({
       );
 
       const { data }: { data: TCreateCardHolderResponse } = await axios.post(
-        `${cardAppApiUrl}/banking/${userId}/holder`,
+        `${cardAppApiUrl}/v1/banking/${userId}/holder`,
         filteredRequestData,
         {
           headers: {

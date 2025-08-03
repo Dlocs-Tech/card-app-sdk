@@ -36,7 +36,7 @@ export const useGetUserCards = ({
       if (!userId) throw new Error('User ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/cards`,
+        `${cardAppApiUrl}/v1/banking/${userId}/cards`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

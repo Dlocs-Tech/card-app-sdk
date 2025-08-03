@@ -35,7 +35,7 @@ export const useGetUserSingleCardBalance = ({
       if (!cardId) throw new Error('Card ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/cards/balance/${cardId}`,
+        `${cardAppApiUrl}/v1/banking/${userId}/cards/balance/${cardId}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

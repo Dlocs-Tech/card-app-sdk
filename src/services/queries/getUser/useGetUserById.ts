@@ -19,7 +19,7 @@ export const useGetUserById = ({
     queryFn: async () => {
       if (!id) throw new Error('Id is missing');
 
-      const response = await axios.get(`${cardAppApiUrl}/users`, {
+      const response = await axios.get(`${cardAppApiUrl}/v1/users`, {
         params: { id },
         headers: { 'x-api-key': cardAppApiKey },
       });

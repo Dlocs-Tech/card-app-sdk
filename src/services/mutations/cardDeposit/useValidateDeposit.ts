@@ -33,7 +33,7 @@ export const useValidateDeposit = ({
         throw new Error('Transaction ID or TX hash is missing');
 
       const { data }: { data: TValidateDepositResponse } = await axios.post(
-        `${cardAppApiUrl}/deposit/validate-deposit/${transactionId}`,
+        `${cardAppApiUrl}/v1/deposit/validate-deposit/${transactionId}`,
         { txHash },
         {
           headers: {

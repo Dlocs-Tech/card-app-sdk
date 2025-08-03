@@ -35,7 +35,7 @@ export const useGetUserTransactionsById = ({
       if (!id) throw new Error('Transaction ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/transactions/${userId}/${id}`,
+        `${cardAppApiUrl}/v1/transactions/${userId}/${id}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

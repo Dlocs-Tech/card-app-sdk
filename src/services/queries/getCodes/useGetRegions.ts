@@ -26,7 +26,7 @@ export const useGetRegions = ({ onError, refetchInterval }: TGenericQuery) => {
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(`${cardAppApiUrl}/banking/region`, {
+      const response = await axios.get(`${cardAppApiUrl}/v1/banking/region`, {
         headers: { 'x-api-key': cardAppApiKey },
       });
 

@@ -67,7 +67,7 @@ export const useGetUserCardInfo = ({
       setError(null);
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
+        `${cardAppApiUrl}/v1/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

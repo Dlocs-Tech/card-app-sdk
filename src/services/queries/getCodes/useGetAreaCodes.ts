@@ -31,7 +31,7 @@ export const useGetAreaCodes = ({
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(`${cardAppApiUrl}/banking/mobile`, {
+      const response = await axios.get(`${cardAppApiUrl}/v1/banking/mobile`, {
         headers: { 'x-api-key': cardAppApiKey },
       });
 

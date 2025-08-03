@@ -32,7 +32,7 @@ export const useCreateUser = ({
       if (!email || !address) throw new Error('Authentication failed');
 
       const { data }: { data: TCreateUserResponse } = await axios.post(
-        `${cardAppApiUrl}/users`,
+        `${cardAppApiUrl}/v1/users`,
         {
           email,
           address,

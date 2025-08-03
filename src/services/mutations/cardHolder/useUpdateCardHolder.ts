@@ -45,7 +45,7 @@ export const useUpdateCardHolder = ({
       );
 
       const { data }: { data: TUpdateCardHolderResponse } = await axios.put(
-        `${cardAppApiUrl}/banking/${userId}/holder/${holderId}`,
+        `${cardAppApiUrl}/v1/banking/${userId}/holder/${holderId}`,
         filteredRequestData,
         {
           headers: {

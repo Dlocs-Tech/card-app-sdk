@@ -36,7 +36,7 @@ export const useGetCities = ({
     refetchInterval,
     queryFn: async () => {
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/city?regionCode=${regionCode}`,
+        `${cardAppApiUrl}/v1/banking/city?regionCode=${regionCode}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

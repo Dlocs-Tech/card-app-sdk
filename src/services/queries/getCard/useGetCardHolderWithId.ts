@@ -51,7 +51,7 @@ export const useGetCardHolderWithId = ({
       if (!holderId) throw new Error('Holder ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/holder/${holderId}`,
+        `${cardAppApiUrl}/v1/banking/${userId}/holder/${holderId}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

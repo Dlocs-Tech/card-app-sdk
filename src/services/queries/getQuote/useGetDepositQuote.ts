@@ -57,7 +57,7 @@ export const useGetDepositQuote = ({
       );
 
       const response = await axios.post(
-        `${cardAppApiUrl}/deposit/pre-deposit/${userId}`,
+        `${cardAppApiUrl}/v1/deposit/pre-deposit/${userId}`,
         filteredQuoteParams,
         {
           headers: { 'x-api-key': cardAppApiKey },

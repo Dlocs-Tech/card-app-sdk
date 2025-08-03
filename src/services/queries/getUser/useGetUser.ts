@@ -19,7 +19,7 @@ export const useGetUser = ({
     queryFn: async () => {
       if (!email) throw new Error('Email is missing');
 
-      const response = await axios.get(`${cardAppApiUrl}/users`, {
+      const response = await axios.get(`${cardAppApiUrl}/v1/users`, {
         params: { email },
         headers: { 'x-api-key': cardAppApiKey },
       });
