@@ -4,14 +4,12 @@ import { useCardAppContext } from '../../../providers';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
-export type TQuote = {
-  to: string;
-  data: string;
-};
-
 export type TDepositQuoteResponse = {
-  txId: number;
-  quotes: TQuote[];
+  platformFee: string;
+  businessFee: string;
+  providerFee: string;
+  amountToReceive: string;
+  minimumDepositAmount: string;
 };
 
 export type TGetDepositQuoteResponse = {
@@ -22,18 +20,16 @@ export type TGetDepositQuoteResponse = {
 };
 
 export type TGetDepositQuoteProps = {
-  userId: number;
-  quoteParams: {
-    amount: string;
-    holderId: number;
-    cardId?: number;
-  };
+  amount: string;
+  cardId: number;
+  tierId?: number;
 };
 
 /* Hook */
 export const useGetDepositQuote = ({
-  userId,
-  quoteParams,
+  amount,
+  cardId,
+  tierId,
   enabled,
   onError,
   refetchInterval,
@@ -41,28 +37,22 @@ export const useGetDepositQuote = ({
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
-    queryKey: [
-      'getDepositQuote',
-      userId,
-      quoteParams.amount,
-      quoteParams.holderId,
-      quoteParams.cardId,
-    ],
+    queryKey: ['getDepositQuote', amount, cardId, tierId],
     enabled,
     onError,
     refetchInterval,
     queryFn: async () => {
-      const filteredQuoteParams = Object.fromEntries(
-        Object.entries(quoteParams).filter(([, value]) => value !== undefined)
-      );
+      const queryUrl = new URL(`${cardAppApiUrl}/v1/deposit/quote`);
+      queryUrl.searchParams.set('amount', amount);
+      queryUrl.searchParams.set('cardId', cardId.toString());
 
-      const response = await axios.post(
-        `${cardAppApiUrl}/v1/deposit/pre-deposit/${userId}`,
-        filteredQuoteParams,
-        {
-          headers: { 'x-api-key': cardAppApiKey },
-        }
-      );
+      if (tierId) {
+        queryUrl.searchParams.set('tierId', tierId.toString());
+      }
+
+      const response = await axios.get(queryUrl.toString(), {
+        headers: { 'x-api-key': cardAppApiKey },
+      });
 
       const depositQuote: TGetDepositQuoteResponse = response.data;
       return depositQuote.data;
