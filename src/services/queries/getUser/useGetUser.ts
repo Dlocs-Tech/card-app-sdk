@@ -1,8 +1,46 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
-import type { TGetUserProps, TGetUserResponse } from './types';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
+
+/* Types */
+export type TCardHolders = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  cardTypeId: number;
+};
+
+export type TCards = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  cardNo: string;
+  userId: number;
+};
+
+export type TUser = {
+  email: string;
+  id: number;
+  businessId: number;
+  role: string;
+  isVerified: true;
+  address: string;
+  card: TCards[];
+  cardHolder: TCardHolders[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+/* Response */
+export type TGetUserResponse = TBaseResponse & {
+  data: TUser;
+};
+
+/* Props */
+export type TGetUserProps = {
+  email: string;
+};
 
 /* Hook */
 export const useGetUser = ({

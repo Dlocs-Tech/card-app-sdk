@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
-import type { TGetUserByIdProps, TGetUserResponse } from './types';
+import type { TGenericQuery } from '../../../types';
+import type { TGetUserResponse } from './useGetUser';
+
+/* Props */
+export type TGetUserByIdProps = {
+  id: number;
+};
 
 /* Hook */
 export const useGetUserById = ({

@@ -2,13 +2,9 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TGetTiersProps = {
-  businessId: number;
-};
-
 export type TTierRule = {
   createdAt: string;
   updatedAt: string;
@@ -34,11 +30,14 @@ export type TTier = {
   rules: TTierRule[];
 };
 
-export type TGetTiersResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetTiersResponse = TBaseResponse & {
   data: TTier[];
+};
+
+/* Props */
+export type TGetTiersProps = {
+  businessId: number;
 };
 
 /* Hook */

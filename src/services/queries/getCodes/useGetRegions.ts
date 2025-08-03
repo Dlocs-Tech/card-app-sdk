@@ -1,20 +1,18 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TRegionResponse = {
+export type TRegion = {
   code: string;
   name: string;
   standardCode: string;
 };
 
-export type TGetRegionsResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
-  data: TRegionResponse[];
+/* Response */
+export type TGetRegionsResponse = TBaseResponse & {
+  data: TRegion[];
 };
 
 /* Hook */

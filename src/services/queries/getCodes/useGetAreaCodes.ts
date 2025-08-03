@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
-/* Types */
+/* Response */
 export type TAreaCode = {
   code: string;
   name: string;
@@ -12,10 +12,8 @@ export type TAreaCode = {
   enableGlobalTrasnfer: boolean;
 };
 
-export type TGetAreaCodesResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
+/* Response */
+export type TGetAreaCodesResponse = TBaseResponse & {
   data: TAreaCode[];
 };
 

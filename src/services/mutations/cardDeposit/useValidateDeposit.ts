@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TBaseResponse, TGenericMutation } from '../../../types/globals';
+import type { TBaseResponse, TGenericMutation } from '../../../types';
 
 /* Response */
 export type TValidateDepositResponse = TBaseResponse & {

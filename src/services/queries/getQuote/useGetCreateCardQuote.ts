@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TCreateCardQuoteDataResponse = {
+export type TCreateCardQuoteData = {
   platformFee: string;
   businessFee: string;
   providerFee: string;
@@ -12,13 +12,12 @@ export type TCreateCardQuoteDataResponse = {
   amountToSend: string;
 };
 
-export type TGetCreateCardQuoteResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
-  data: TCreateCardQuoteDataResponse;
+/* Response */
+export type TGetCreateCardQuoteResponse = TBaseResponse & {
+  data: TCreateCardQuoteData;
 };
 
+/* Props */
 export type TGetCreateCardQuoteProps = {
   holderId?: number;
   tierId?: number;

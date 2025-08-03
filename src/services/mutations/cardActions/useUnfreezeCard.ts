@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation } from '../../../types/globals';
+import type { TGenericMutation } from '../../../types';
 import type { TCardActionsProps, TCardActionsResponse } from './useFreezeCard';
 
 /* Hook */

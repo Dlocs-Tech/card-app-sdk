@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 import type { TTier } from '../getTiers';
 
 /* Types */
@@ -18,10 +18,8 @@ export type TBusinessInfo = {
   tier: TTier;
 };
 
-export type TGetCurrentBusinessInfoResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetCurrentBusinessInfoResponse = TBaseResponse & {
   data: TBusinessInfo;
 };
 

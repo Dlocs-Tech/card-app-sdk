@@ -2,23 +2,22 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TGetUserCardsProps = {
-  userId: number;
-};
-
 export type TUserCard = {
   id: number;
   cardNo: string;
 };
 
-export type TGetUserCardsResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetUserCardsResponse = TBaseResponse & {
   data: TUserCard[];
+};
+
+/* Props */
+export type TGetUserCardsProps = {
+  userId: number;
 };
 
 /* Hook */

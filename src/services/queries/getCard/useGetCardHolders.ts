@@ -1,19 +1,17 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 import type { TCardHolder } from './useGetCardHolderWithId';
 
-/* Types */
-export type TGetCardHoldersProps = {
-  userId: number;
+/* Response */
+export type TGetCardHoldersResponse = TBaseResponse & {
+  data: { total: number; records: TCardHolder[] };
 };
 
-export type TGetCardHoldersResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
-  data: { total: number; records: TCardHolder[] };
+/* Props */
+export type TGetCardHoldersProps = {
+  userId: number;
 };
 
 /* Hook */

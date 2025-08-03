@@ -2,13 +2,9 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TGetUserTransactionsProps = {
-  userId: number;
-};
-
 export type TTransaction = {
   id: number;
   orderNo: string;
@@ -24,11 +20,14 @@ export type TTransaction = {
   updatedAt: string;
 };
 
-export type TGetUserTransactionsResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetUserTransactionsResponse = TBaseResponse & {
   data: TTransaction[];
+};
+
+/* Props */
+export type TGetUserTransactionsProps = {
+  userId: number;
 };
 
 /* Hook */

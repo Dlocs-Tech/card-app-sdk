@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TDepositQuoteDataResponse = {
+export type TDepositQuoteData = {
   platformFee: string;
   businessFee: string;
   providerFee: string;
@@ -12,13 +12,12 @@ export type TDepositQuoteDataResponse = {
   minimumDepositAmount: string;
 };
 
-export type TGetDepositQuoteResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
-  data: TDepositQuoteDataResponse;
+/* Response */
+export type TGetDepositQuoteResponse = TBaseResponse & {
+  data: TDepositQuoteData;
 };
 
+/* Props */
 export type TGetDepositQuoteProps = {
   amount: string;
   cardId: number;
