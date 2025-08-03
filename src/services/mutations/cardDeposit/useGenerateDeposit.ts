@@ -1,7 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation, TQuoteData } from '../../../types/globals';
+import type {
+  TBaseResponse,
+  TGenericMutation,
+  TQuoteData,
+} from '../../../types';
 
 /* Types */
 export type TGenerateDepositQuoteResponse = {
@@ -9,13 +13,11 @@ export type TGenerateDepositQuoteResponse = {
   quotes: TQuoteData[];
 };
 
-export type TGenerateDepositResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
+export type TGenerateDepositResponse = TBaseResponse & {
   data: TGenerateDepositQuoteResponse;
 };
 
+/* Props */
 export type TGenerateDepositProps = {
   userId: number;
   quoteParams: {

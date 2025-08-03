@@ -1,21 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation } from '../../../types/globals';
+import type { TBaseResponse, TGenericMutation } from '../../../types';
 import type { TUser } from '../../queries/getUser';
 
-/* Types */
+/* Response */
+export type TCreateUserResponse = TBaseResponse & {
+  data: TUser;
+};
+
+/* Props */
 export type TCreateUserProps = {
   email: string;
   role: string;
   address: string;
-};
-
-export type TCreateUserResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
-  data: TUser;
 };
 
 /* Hook */

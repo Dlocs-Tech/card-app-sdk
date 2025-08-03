@@ -1,9 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation } from '../../../types/globals';
+import type { TBaseResponse, TGenericMutation } from '../../../types';
 
-/* Types */
+/* Response */
+export type TCreateCardHolderResponse = TBaseResponse & {
+  data: {
+    holderId: number;
+    cardTypeId: number;
+    status: string;
+    statusStr: string;
+    respMsg: string;
+  };
+};
+
+/* Props */
 export type TCreateCardHolderProps = {
   userId: number;
   cardTypeId: number;
@@ -16,19 +27,6 @@ export type TCreateCardHolderProps = {
   town?: string;
   address?: string;
   postCode?: string;
-};
-
-export type TCreateCardHolderResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
-  data: {
-    holderId: number;
-    cardTypeId: number;
-    status: string;
-    statusStr: string;
-    respMsg: string;
-  };
 };
 
 /* Hook */

@@ -1,8 +1,35 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation } from '../../../types/globals';
-import type { TCardActionsProps, TCardActionsResponse } from './types';
+import type { TBaseResponse, TGenericMutation } from '../../../types';
+
+/* Types */
+export type TCard = {
+  orderNo: string;
+  merchantOrderNo: string;
+  cardNo: string;
+  currency: string;
+  amount: string;
+  fee: string;
+  receivedAmount: string;
+  receivedCurrency: string;
+  type: string;
+  status: string;
+  remark: string;
+  transactionTime: number;
+};
+
+/* Response */
+export type TCardActionsResponse = TBaseResponse & {
+  data: TCard;
+};
+
+/* Props */
+export type TCardActionsProps = {
+  userId: number;
+  cardId: number;
+  clientRemark?: string;
+};
 
 /* Hook */
 export const useFreezeCard = ({

@@ -10,6 +10,12 @@ export type TGenericMutation<T> = {
   onSuccess?: (data: T) => void;
 };
 
+export type TBaseResponse = {
+  success: boolean;
+  code: number;
+  msg: string;
+};
+
 export type TQuoteData = {
   to: string;
   data: string;
