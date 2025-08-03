@@ -4,47 +4,47 @@ import { useCardAppContext } from '../../../providers';
 import type { TGenericQuery } from '../../../types/globals';
 
 /* Types */
-export type TDepositQuoteDataResponse = {
+export type TCreateCardQuoteDataResponse = {
   platformFee: string;
   businessFee: string;
   providerFee: string;
   amountToReceive: string;
-  minimumDepositAmount: string;
+  amountToSend: string;
 };
 
-export type TGetDepositQuoteResponse = {
+export type TGetCreateCardQuoteResponse = {
   code: number;
   msg: string;
   success: boolean;
-  data: TDepositQuoteDataResponse;
+  data: TCreateCardQuoteDataResponse;
 };
 
-export type TGetDepositQuoteProps = {
-  amount: string;
-  cardId: number;
+export type TGetCreateCardQuoteProps = {
+  holderId?: number;
   tierId?: number;
 };
 
 /* Hook */
-export const useGetDepositQuote = ({
-  amount,
-  cardId,
+export const useGetCreateCardQuote = ({
+  holderId,
   tierId,
   enabled,
   onError,
   refetchInterval,
-}: TGetDepositQuoteProps & TGenericQuery) => {
+}: TGetCreateCardQuoteProps & TGenericQuery) => {
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getDepositQuote', amount, cardId, tierId],
+    queryKey: ['getCreateCardQuote', holderId, tierId],
     enabled,
     onError,
     refetchInterval,
     queryFn: async () => {
-      const queryUrl = new URL(`${cardAppApiUrl}/v1/deposit/quote`);
-      queryUrl.searchParams.set('amount', amount);
-      queryUrl.searchParams.set('cardId', cardId.toString());
+      const queryUrl = new URL(`${cardAppApiUrl}/v2/cards/quote`);
+
+      if (holderId) {
+        queryUrl.searchParams.set('holderId', holderId.toString());
+      }
 
       if (tierId) {
         queryUrl.searchParams.set('tierId', tierId.toString());
@@ -54,7 +54,7 @@ export const useGetDepositQuote = ({
         headers: { 'x-api-key': cardAppApiKey },
       });
 
-      const depositQuote: TGetDepositQuoteResponse = response.data;
+      const depositQuote: TGetCreateCardQuoteResponse = response.data;
       return depositQuote.data;
     },
     cacheTime: 0,
