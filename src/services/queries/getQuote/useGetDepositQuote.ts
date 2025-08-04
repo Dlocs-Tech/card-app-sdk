@@ -9,9 +9,15 @@ export type TQuote = {
   data: string;
 };
 
+export type TExtraData = {
+  fee: number;
+  amount: number;
+};
+
 export type TDepositQuoteResponse = {
   txId: number;
   quotes: TQuote[];
+  extraData: TExtraData;
 };
 
 export type TGetDepositQuoteResponse = {
