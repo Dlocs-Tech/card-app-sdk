@@ -20,11 +20,9 @@ export type TGenerateDepositResponse = TBaseResponse & {
 /* Props */
 export type TGenerateDepositProps = {
   userId: number;
-  quoteParams: {
-    amount: string;
-    holderId: number;
-    cardId: number;
-  };
+  amount: string;
+  holderId: number;
+  cardId: number;
 };
 
 /* Hook */
@@ -37,13 +35,18 @@ export const useGenerateDeposit = ({
   return useMutation<TGenerateDepositResponse, Error, TGenerateDepositProps>({
     onError,
     onSuccess,
-    mutationFn: async ({ userId, quoteParams }: TGenerateDepositProps) => {
-      if (!userId || !quoteParams)
-        throw new Error('User ID or quote params is missing');
+    mutationFn: async ({
+      userId,
+      amount,
+      holderId,
+      cardId,
+    }: TGenerateDepositProps) => {
+      if (!userId || !amount || !holderId || !cardId)
+        throw new Error('User ID, amount, holder ID, or card ID is missing');
 
       const { data }: { data: TGenerateDepositResponse } = await axios.post(
         `${cardAppApiUrl}/v2/deposit/request/${userId}`,
-        { quoteParams },
+        { amount, holderId, cardId },
         {
           headers: {
             'x-api-key': cardAppApiKey,

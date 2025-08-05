@@ -20,10 +20,8 @@ export type TGenerateCardCreationResponse = TBaseResponse & {
 /* Props */
 export type TGenerateCardCreationProps = {
   userId: number;
-  quoteParams: {
-    holderId: number;
-    tierId: number;
-  };
+  holderId: number;
+  tierId: number;
 };
 
 /* Hook */
@@ -40,14 +38,18 @@ export const useGenerateCardCreation = ({
   >({
     onError,
     onSuccess,
-    mutationFn: async ({ userId, quoteParams }: TGenerateCardCreationProps) => {
-      if (!userId || !quoteParams)
-        throw new Error('User ID or quote params is missing');
+    mutationFn: async ({
+      userId,
+      holderId,
+      tierId,
+    }: TGenerateCardCreationProps) => {
+      if (!userId || !holderId || !tierId)
+        throw new Error('User ID, holder ID, or tier ID is missing');
 
       const { data }: { data: TGenerateCardCreationResponse } =
         await axios.post(
           `${cardAppApiUrl}/v2/cards/${userId}/create`,
-          { quoteParams },
+          { holderId, tierId },
           {
             headers: {
               'x-api-key': cardAppApiKey,
