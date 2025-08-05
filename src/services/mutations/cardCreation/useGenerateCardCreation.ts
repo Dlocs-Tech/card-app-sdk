@@ -20,8 +20,8 @@ export type TGenerateCardCreationResponse = TBaseResponse & {
 /* Props */
 export type TGenerateCardCreationProps = {
   userId: number;
-  holderId: number;
-  tierId: number;
+  holderId?: number;
+  tierId?: number;
 };
 
 /* Hook */
@@ -43,20 +43,31 @@ export const useGenerateCardCreation = ({
       holderId,
       tierId,
     }: TGenerateCardCreationProps) => {
-      if (!userId || !holderId || !tierId)
-        throw new Error('User ID, holder ID, or tier ID is missing');
+      const body: Record<string, number> = {};
+
+      if (!userId) throw new Error('User ID is missing');
+
+      if (!holderId && !tierId)
+        throw new Error('Holder ID or tier ID is missing');
+
+      if (holderId && tierId)
+        throw new Error('Holder ID and tier ID cannot be provided together');
+
+      if (holderId) {
+        body.holderId = holderId;
+      }
+
+      if (tierId) {
+        body.tierId = tierId;
+      }
 
       const { data }: { data: TGenerateCardCreationResponse } =
-        await axios.post(
-          `${cardAppApiUrl}/v2/cards/${userId}/create`,
-          { holderId, tierId },
-          {
-            headers: {
-              'x-api-key': cardAppApiKey,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        await axios.post(`${cardAppApiUrl}/v2/cards/${userId}/create`, body, {
+          headers: {
+            'x-api-key': cardAppApiKey,
+            'Content-Type': 'application/json',
+          },
+        });
 
       return data;
     },
