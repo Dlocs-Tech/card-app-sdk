@@ -8,7 +8,9 @@ export type TDepositQuoteData = {
   platformFee: string;
   businessFee: string;
   providerFee: string;
+  totalFee: string;
   amountToReceive: string;
+  amountToSend: string;
   minimumDepositAmount: string;
 };
 
