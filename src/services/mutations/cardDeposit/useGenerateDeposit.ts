@@ -6,6 +6,7 @@ import type {
   TGenericMutation,
   TQuoteData,
 } from '../../../types';
+import { parseEther } from 'ethers';
 
 /* Types */
 export type TGenerateDepositQuoteResponse = {
@@ -46,7 +47,7 @@ export const useGenerateDeposit = ({
 
       const { data }: { data: TGenerateDepositResponse } = await axios.post(
         `${cardAppApiUrl}/v2/deposit/request/${userId}`,
-        { amount, holderId, cardId },
+        { holderId, cardId, amount: parseEther(amount).toString() },
         {
           headers: {
             'x-api-key': cardAppApiKey,
