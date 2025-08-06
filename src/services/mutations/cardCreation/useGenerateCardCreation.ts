@@ -50,9 +50,6 @@ export const useGenerateCardCreation = ({
       if (!holderId && !tierId)
         throw new Error('Holder ID or tier ID is missing');
 
-      if (holderId && tierId)
-        throw new Error('Holder ID and tier ID cannot be provided together');
-
       if (holderId) {
         body.holderId = holderId;
       }
