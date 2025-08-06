@@ -13,8 +13,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: write
       packages: write
@@ -62,9 +60,11 @@ jobs:
         run: yarn build
 
       - name: Publish to npm
-        run: yarn publish --non-interactive
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          yarn publish --non-interactive
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Git tag
         run: |
