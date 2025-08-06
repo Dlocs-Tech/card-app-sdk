@@ -23,14 +23,12 @@ export type TGetDepositQuoteResponse = TBaseResponse & {
 export type TGetDepositQuoteProps = {
   amount: string;
   cardId: number;
-  tierId?: number;
 };
 
 /* Hook */
 export const useGetDepositQuote = ({
   amount,
   cardId,
-  tierId,
   enabled,
   onError,
   refetchInterval,
@@ -38,7 +36,7 @@ export const useGetDepositQuote = ({
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getDepositQuote', amount, cardId, tierId],
+    queryKey: ['getDepositQuote', amount, cardId],
     enabled,
     onError,
     refetchInterval,
@@ -46,10 +44,6 @@ export const useGetDepositQuote = ({
       const queryUrl = new URL(`${cardAppApiUrl}/v1/deposit/quote`);
       queryUrl.searchParams.set('amount', amount);
       queryUrl.searchParams.set('cardId', cardId.toString());
-
-      if (tierId) {
-        queryUrl.searchParams.set('tierId', tierId.toString());
-      }
 
       const response = await axios.get(queryUrl.toString(), {
         headers: { 'x-api-key': cardAppApiKey },
