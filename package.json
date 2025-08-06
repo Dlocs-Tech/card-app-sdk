@@ -1,10 +1,10 @@
 {
   "name": "@dlocs-tech/card-app-sdk",
-  "version": "1.48.0",
+  "version": "1.49.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "main": "./dist/card-app-sdk.umd.js",
   "module": "./dist/card-app-sdk.es.js",
