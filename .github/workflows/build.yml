@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     strategy:
       matrix:
         node-version: [22.13]
@@ -33,12 +33,11 @@ jobs:
         with:
           cache: 'yarn'
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@dlocs-tech'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: |
-          yarn install
+          yarn install --frozen-lockfile
 
       - name: Build entire project
         continue-on-error: true
