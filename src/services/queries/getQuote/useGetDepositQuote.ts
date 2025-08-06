@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import type { TBaseResponse, TGenericQuery } from '../../../types';
+import { parseEther } from 'ethers';
 
 /* Types */
 export type TDepositQuoteData = {
@@ -42,7 +43,7 @@ export const useGetDepositQuote = ({
     refetchInterval,
     queryFn: async () => {
       const queryUrl = new URL(`${cardAppApiUrl}/v1/deposit/quote`);
-      queryUrl.searchParams.set('amount', amount);
+      queryUrl.searchParams.set('amount', parseEther(amount).toString());
       queryUrl.searchParams.set('cardId', cardId.toString());
 
       const response = await axios.get(queryUrl.toString(), {
