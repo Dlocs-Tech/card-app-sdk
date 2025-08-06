@@ -3,14 +3,9 @@ import { useState, useEffect } from 'react';
 import forge from 'node-forge';
 import { useCardAppContext } from '../../../providers';
 import { exportPublicKey, generateKeyPair } from '../../../utils';
+import type { TBaseResponse } from '../../../types';
 
 /* Types */
-export type TGetUserCardInfoProps = {
-  userId: number;
-  cardId: number;
-  enabled?: boolean;
-};
-
 export type TBalanceInfo = {
   cardNo: string;
   amount: string;
@@ -32,11 +27,16 @@ export type TUserCardInfo = {
   balanceInfo: TBalanceInfo;
 };
 
-export type TGetUserCardInfoResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetUserCardInfoResponse = TBaseResponse & {
   data: TUserCardInfo;
+};
+
+/* Props */
+export type TGetUserCardInfoProps = {
+  userId: number;
+  cardId: number;
+  enabled?: boolean;
 };
 
 /* Hook */
@@ -67,7 +67,7 @@ export const useGetUserCardInfo = ({
       setError(null);
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/cards/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
+        `${cardAppApiUrl}/v2/cards/${userId}/${cardId}?publicKey=${encodeURIComponent(publicKey)}&onlySimpleInfo=false`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

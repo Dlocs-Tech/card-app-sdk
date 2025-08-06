@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
 export type TCardType = {
@@ -37,10 +37,8 @@ export type TCardType = {
   enableUnFreeze: boolean;
 };
 
-export type TGetCardTypesResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetCardTypesResponse = TBaseResponse & {
   data: TCardType[];
 };
 
@@ -56,7 +54,7 @@ export const useGetCardTypes = ({
     onError,
     refetchInterval,
     queryFn: async () => {
-      const response = await axios.get(`${cardAppApiUrl}/banking/cards/types`, {
+      const response = await axios.get(`${cardAppApiUrl}/v2/cards/types`, {
         headers: { 'x-api-key': cardAppApiKey },
       });
 

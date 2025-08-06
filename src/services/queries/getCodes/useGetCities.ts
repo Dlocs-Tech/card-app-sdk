@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
 export type TCity = {
@@ -11,14 +11,13 @@ export type TCity = {
   parentCode: string;
 };
 
-export type TGetCitiesResponse = {
-  code: number;
-  msg: string;
-  success: boolean;
+/* Response */
+export type TGetCitiesResponse = TBaseResponse & {
   data: TCity[];
 };
 
-export type TGetCitiesParams = TGenericQuery & {
+/* Props */
+export type TGetCitiesProps = TGenericQuery & {
   regionCode: string;
 };
 
@@ -27,7 +26,7 @@ export const useGetCities = ({
   onError,
   refetchInterval,
   regionCode,
-}: TGetCitiesParams) => {
+}: TGetCitiesProps) => {
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
@@ -36,7 +35,7 @@ export const useGetCities = ({
     refetchInterval,
     queryFn: async () => {
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/city?regionCode=${regionCode}`,
+        `${cardAppApiUrl}/v1/banking/city?regionCode=${regionCode}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

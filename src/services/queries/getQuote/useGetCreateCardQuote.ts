@@ -2,55 +2,59 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import type { TBaseResponse, TGenericQuery } from '../../../types';
-import { parseEther } from 'ethers';
 
 /* Types */
-export type TDepositQuoteData = {
+export type TCreateCardQuoteData = {
   platformFee: string;
   businessFee: string;
   providerFee: string;
   totalFee: string;
   amountToReceive: string;
   amountToSend: string;
-  minimumDepositAmount: string;
 };
 
 /* Response */
-export type TGetDepositQuoteResponse = TBaseResponse & {
-  data: TDepositQuoteData;
+export type TGetCreateCardQuoteResponse = TBaseResponse & {
+  data: TCreateCardQuoteData;
 };
 
 /* Props */
-export type TGetDepositQuoteProps = {
-  amount: string;
-  cardId: number;
+export type TGetCreateCardQuoteProps = {
+  holderId?: number;
+  tierId?: number;
 };
 
 /* Hook */
-export const useGetDepositQuote = ({
-  amount,
-  cardId,
+export const useGetCreateCardQuote = ({
+  holderId,
+  tierId,
   enabled,
   onError,
   refetchInterval,
-}: TGetDepositQuoteProps & TGenericQuery) => {
+}: TGetCreateCardQuoteProps & TGenericQuery) => {
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getDepositQuote', amount, cardId],
+    queryKey: ['getCreateCardQuote', holderId, tierId],
     enabled,
     onError,
     refetchInterval,
     queryFn: async () => {
-      const queryUrl = new URL(`${cardAppApiUrl}/v1/deposit/quote`);
-      queryUrl.searchParams.set('amount', parseEther(amount).toString());
-      queryUrl.searchParams.set('cardId', cardId.toString());
+      const queryUrl = new URL(`${cardAppApiUrl}/v2/cards/quote`);
+
+      if (holderId) {
+        queryUrl.searchParams.set('holderId', holderId.toString());
+      }
+
+      if (tierId) {
+        queryUrl.searchParams.set('tierId', tierId.toString());
+      }
 
       const response = await axios.get(queryUrl.toString(), {
         headers: { 'x-api-key': cardAppApiKey },
       });
 
-      const depositQuote: TGetDepositQuoteResponse = response.data;
+      const depositQuote: TGetCreateCardQuoteResponse = response.data;
       return depositQuote.data;
     },
     cacheTime: 0,

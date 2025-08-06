@@ -1,14 +1,9 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 
 /* Types */
-export type TGetCardHolderWithIdProps = {
-  userId: number;
-  holderId: number;
-};
-
 export type TCardHolder = {
   holderId: number;
   cardTypeId: number;
@@ -27,11 +22,15 @@ export type TCardHolder = {
   postCode: string;
 };
 
-export type TGetCardHolderResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
+/* Response */
+export type TGetCardHolderResponse = TBaseResponse & {
   data: TCardHolder;
+};
+
+/* Props */
+export type TGetCardHolderWithIdProps = {
+  userId: number;
+  holderId: number;
 };
 
 /* Hook */
@@ -51,7 +50,7 @@ export const useGetCardHolderWithId = ({
       if (!holderId) throw new Error('Holder ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/holder/${holderId}`,
+        `${cardAppApiUrl}/v1/banking/${userId}/holder/${holderId}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

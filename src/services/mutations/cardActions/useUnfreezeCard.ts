@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import axios from 'axios';
-import type { TGenericMutation } from '../../../types/globals';
-import type { TCardActionsProps, TCardActionsResponse } from './types';
+import type { TGenericMutation } from '../../../types';
+import type { TCardActionsProps, TCardActionsResponse } from './useFreezeCard';
 
 /* Hook */
 export const useUnfreezeCard = ({
@@ -18,7 +18,7 @@ export const useUnfreezeCard = ({
       if (!userId || !cardId) throw new Error('User ID or card ID is missing');
 
       const { data }: { data: TCardActionsResponse } = await axios.post(
-        `${cardAppApiUrl}/banking/${userId}/cards/unfreeze/${cardId}`,
+        `${cardAppApiUrl}/v2/cards/${userId}/unfreeze/${cardId}`,
         {
           ...(clientRemark && { clientRemark }),
         },

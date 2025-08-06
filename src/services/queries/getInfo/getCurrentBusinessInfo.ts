@@ -3,46 +3,46 @@ import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
 import type { TBaseResponse, TGenericQuery } from '../../../types';
+import type { TTier } from '../getTiers';
 
 /* Types */
-export type TUserCard = {
+export type TBusinessInfo = {
+  createdAt: string;
+  updatedAt: string;
   id: number;
-  cardNo: string;
+  name: string;
+  feeReceiverAddress: string;
+  feeCreate: number;
+  feeDeposit: number;
+  maxCardsPerUser: number;
+  tier: TTier;
 };
 
 /* Response */
-export type TGetUserCardsResponse = TBaseResponse & {
-  data: TUserCard[];
-};
-
-/* Props */
-export type TGetUserCardsProps = {
-  userId: number;
+export type TGetCurrentBusinessInfoResponse = TBaseResponse & {
+  data: TBusinessInfo;
 };
 
 /* Hook */
-export const useGetUserCards = ({
-  userId,
+export const useGetCurrentBusinessInfo = ({
   onError,
   enabled,
-}: TGetUserCardsProps & TGenericQuery) => {
+}: TGenericQuery) => {
   const { cardAppApiKey, cardAppApiUrl } = useCardAppContext();
 
   return useQuery({
-    queryKey: ['getUserCards', userId],
+    queryKey: ['getCurrentBusinessInfo'],
     onError,
     queryFn: async () => {
-      if (!userId) throw new Error('User ID is missing');
-
       const response = await axios.get(
-        `${cardAppApiUrl}/v2/cards/${userId}/cards`,
+        `${cardAppApiUrl}/v1/businesses/current`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }
       );
 
-      const userCards: TGetUserCardsResponse = response.data;
-      return userCards.data;
+      const businessInfo: TGetCurrentBusinessInfoResponse = response.data;
+      return businessInfo.data;
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,

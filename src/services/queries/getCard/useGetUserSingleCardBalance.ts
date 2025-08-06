@@ -2,20 +2,18 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import { STALE_TIME } from '../../../constants';
-import type { TGenericQuery } from '../../../types/globals';
+import type { TBaseResponse, TGenericQuery } from '../../../types';
 import type { TBalanceInfo } from './useGetUserCardInfo';
 
-/* Types */
+/* Response */
+export type TGetUserSingleCardBalanceResponse = TBaseResponse & {
+  data: TBalanceInfo;
+};
+
+/* Props */
 export type TGetUserSingleCardBalanceProps = {
   userId: number;
   cardId: number;
-};
-
-export type TGetUserSingleCardBalanceResponse = {
-  success: boolean;
-  code: number;
-  msg: string;
-  data: TBalanceInfo;
 };
 
 /* Hook */
@@ -35,7 +33,7 @@ export const useGetUserSingleCardBalance = ({
       if (!cardId) throw new Error('Card ID is missing');
 
       const response = await axios.get(
-        `${cardAppApiUrl}/banking/${userId}/cards/balance/${cardId}`,
+        `${cardAppApiUrl}/v2/cards/${userId}/balance/${cardId}`,
         {
           headers: { 'x-api-key': cardAppApiKey },
         }

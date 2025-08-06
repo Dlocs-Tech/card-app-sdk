@@ -1,6 +1,6 @@
 {
   "name": "@dlocs-tech/card-app-sdk",
-  "version": "1.46.0",
+  "version": "1.47.0",
   "author": "Dlocs-Tech",
   "license": "MIT",
   "publishConfig": {
@@ -64,6 +64,7 @@
   "dependencies": {
     "@tanstack/react-query": "4.40.1",
     "axios": "^1.9.0",
+    "ethers": "^6.15.0",
     "forge": "^2.3.0",
     "node-forge": "^1.3.1"
   }
