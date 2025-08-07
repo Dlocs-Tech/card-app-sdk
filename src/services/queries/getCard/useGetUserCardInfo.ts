@@ -84,10 +84,10 @@ export const useGetUserCardInfo = ({
       );
 
       const userCardInfo: TGetUserCardInfoResponse = response.data;
-      const cardInfo: Omit<TUserCardInfo, 'cvv' | 'validPeriod'> =
-        userCardInfo.data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { cvv, validPeriod, ...cardInfo } = userCardInfo.data;
 
-      setUserCardInfo(cardInfo);
+      setUserCardInfo(cardInfo as Omit<TUserCardInfo, 'cvv' | 'validPeriod'>);
       return userCardInfo.data;
     } catch (err) {
       setError(err as Error);

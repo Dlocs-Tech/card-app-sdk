@@ -62,10 +62,10 @@ const fetchCardInfo = async (
     );
 
     const userCardInfo: TGetUserCardInfoResponse = response.data;
-    const cardInfo: Omit<TUserCardInfo, 'cvv' | 'validPeriod'> =
-      userCardInfo.data;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { cvv, validPeriod, ...cardInfo } = userCardInfo.data;
 
-    return cardInfo;
+    return cardInfo as Omit<TUserCardInfo, 'cvv' | 'validPeriod'>;
   } catch (error) {
     console.error(`Error fetching card info: ${error}`);
     return null;
