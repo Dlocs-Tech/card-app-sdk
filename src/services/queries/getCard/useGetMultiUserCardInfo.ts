@@ -34,11 +34,13 @@ export const useGetMultiUserCardInfo = ({
       const { publicKey: publicKeyPem } = generateKeyPair();
       const publicKey = exportPublicKey(publicKeyPem);
 
-      return await Promise.all(
+      const cardsInfos = await Promise.all(
         cardIds.map((cardId) =>
           fetchCardInfo(cardAppApiUrl, cardAppApiKey, publicKey, userId, cardId)
         )
       );
+
+      return cardsInfos.filter((result) => result !== null);
     },
     enabled: !!enabled,
     staleTime: STALE_TIME,
