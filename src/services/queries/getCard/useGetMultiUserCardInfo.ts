@@ -69,7 +69,7 @@ const fetchCardInfo = async (
 
     return cardInfo as Omit<TUserCardInfo, 'cvv' | 'validPeriod'>;
   } catch (error) {
-    console.error(`Error fetching card info: ${error}`);
+    console.error(`Error fetching card ${cardId} info: ${error}`);
     return null;
   }
 };
