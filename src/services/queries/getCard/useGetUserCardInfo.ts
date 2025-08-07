@@ -4,6 +4,7 @@ import forge from 'node-forge';
 import { useCardAppContext } from '../../../providers';
 import { exportPublicKey, generateKeyPair } from '../../../utils';
 import type { TBaseResponse } from '../../../types';
+import type { TTier } from '../getTiers/useGetTiers';
 
 /* Types */
 export type TBalanceInfo = {
@@ -16,12 +17,21 @@ export type TBalanceInfo = {
 export type TUserCardInfo = {
   id: number;
   cardNo: string;
+  userId: number;
+  tierId: number;
+  startTierDate: string;
+  endTierDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+  tier: Omit<TTier, 'rules'>;
+  cardTypeId: number;
   holderId: number;
   cardNumber: string;
   cvv: string;
   validPeriod: string;
   status: string;
   statusStr: string;
+  blocked: boolean;
   bindTime: number;
   remark: string | null;
   balanceInfo: TBalanceInfo;
@@ -77,7 +87,7 @@ export const useGetUserCardInfo = ({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { cvv, validPeriod, ...cardInfo } = userCardInfo.data;
 
-      setUserCardInfo(cardInfo);
+      setUserCardInfo(cardInfo as Omit<TUserCardInfo, 'cvv' | 'validPeriod'>);
       return userCardInfo.data;
     } catch (err) {
       setError(err as Error);
