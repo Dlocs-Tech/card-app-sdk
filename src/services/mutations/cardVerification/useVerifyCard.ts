@@ -49,7 +49,7 @@ export const useVerifyCard = ({
         throw new Error('User id, title, card number and file id are required');
 
       const { data }: { data: TVerifyCardResponse } = await axios.post(
-        `${cardAppApiUrl}/v1/banking/work/submit/${userId}`,
+        `${cardAppApiUrl}/banking/work/submit/${userId}`,
         {
           title,
           target: cardNumber,
