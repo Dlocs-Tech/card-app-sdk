@@ -3,3 +3,4 @@ export * from './cardHolder';
 export * from './cardActions';
 export * from './cardDeposit';
 export * from './cardCreation';
+export * from './cardVerification';
