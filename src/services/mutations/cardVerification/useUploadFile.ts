@@ -39,6 +39,7 @@ export const useUploadFile = ({
         {
           headers: {
             'x-api-key': cardAppApiKey,
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
