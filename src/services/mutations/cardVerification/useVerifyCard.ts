@@ -28,6 +28,7 @@ export type TVerifyCardProps = {
   title: string;
   cardNumber: string;
   fileId: string;
+  cardId: number;
 };
 
 /* Hook */
@@ -45,12 +46,15 @@ export const useVerifyCard = ({
       title,
       cardNumber,
       fileId,
+      cardId,
     }: TVerifyCardProps) => {
-      if (!userId || !title || !cardNumber || !fileId)
-        throw new Error('User id, title, card number and file id are required');
+      if (!userId || !title || !cardNumber || !fileId || !cardId)
+        throw new Error(
+          'User id, title, card number, file id and card id are required'
+        );
 
       const { data }: { data: TVerifyCardResponse } = await axios.post(
-        `${cardAppApiUrl}/v1/banking/work/submit/${userId}`,
+        `${cardAppApiUrl}/v1/banking/${userId}/work/submit/${cardId}`,
         {
           title,
           target: cardNumber,
