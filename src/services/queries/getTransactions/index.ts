@@ -1,2 +1,2 @@
-export * from './useGetUserTransactions';
-export * from './useGetUserTransactionsById';
+export * from './useGetOnchainUserTxs';
+export * from './useGetOnchainUserCardTxs';
