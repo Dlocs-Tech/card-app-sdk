@@ -7,7 +7,10 @@ import type { TOnchainUserTx } from './useGetOnchainUserTxs';
 
 /* Response */
 export type TGetOnchainUserCardTxsResponse = TBaseResponse & {
-  data: TOnchainUserTx[];
+  data: {
+    total: number;
+    records: TOnchainUserTx[];
+  };
 };
 
 /* Props */

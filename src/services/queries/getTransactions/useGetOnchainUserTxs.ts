@@ -22,7 +22,10 @@ export type TOnchainUserTx = {
 
 /* Response */
 export type TGetOnchainUserTxsResponse = TBaseResponse & {
-  data: TOnchainUserTx[];
+  data: {
+    total: number;
+    records: TOnchainUserTx[];
+  };
 };
 
 /* Props */
