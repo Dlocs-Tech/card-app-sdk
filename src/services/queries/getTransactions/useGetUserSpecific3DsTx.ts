@@ -16,7 +16,7 @@ export type TGetUserSpecific3DsTxResponse = TBaseResponse & {
 export type TGetUserSpecific3DsTxProps = {
   userId: number;
   cardId: number;
-  tradeNo: number;
+  tradeNo: string;
 };
 
 /* Hook */
