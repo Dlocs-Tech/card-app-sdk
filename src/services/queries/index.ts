@@ -5,3 +5,4 @@ export * from './getTransactions';
 export * from './getQuote';
 export * from './getTiers';
 export * from './getInfo';
+export * from './getKyc';
