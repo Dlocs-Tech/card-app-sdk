@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useCardAppContext } from '../../../providers';
 import type { TBaseResponse, TGenericQuery } from '../../../types';
+import type { TKycUserInfo } from '../getKyc/getKycUserInfo';
 
 /* Types */
 export type TCardHolders = {
@@ -26,6 +27,7 @@ export type TUser = {
   role: string;
   isVerified: true;
   address: string;
+  kyc: TKycUserInfo;
   card: TCards[];
   cardHolder: TCardHolders[];
   createdAt: Date;
