@@ -65,6 +65,7 @@ export const useVerifyCard = ({
         {
           headers: {
             'x-api-key': cardAppApiKey,
+            'Content-Type': 'application/json',
           },
         }
       );

@@ -36,7 +36,12 @@ export const useCreateUser = ({
           address,
           role: role ?? 'USER',
         },
-        { headers: { 'x-api-key': cardAppApiKey } }
+        {
+          headers: {
+            'x-api-key': cardAppApiKey,
+            'Content-Type': 'application/json',
+          },
+        }
       );
 
       return data;
